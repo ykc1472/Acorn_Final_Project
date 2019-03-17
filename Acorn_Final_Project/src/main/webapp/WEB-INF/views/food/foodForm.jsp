@@ -33,8 +33,8 @@
 						if(${foodinfo.foption} == select){
 							var tegs = "<table id='${foodinfo.foption}'><tr><td colspan='2'>옵션 ${foodinfo.foption}: ${foodinfo.optionname}(+<fmt:formatNumber value='${foodinfo.optionprice}' pattern='###,###,### 원' />)";
 						    tegs += "</td><td rowspan='3'><input type='button' value='옵션삭제' data-delete='${foodinfo.foption}'></td>";
-							tegs += "</tr><tr><td>수량<input type='text' name='amount' value='1' data-amount='${foodinfo.foption}'> </td><td><img src='content/image/order/minus.PNG' data-down='${foodinfo.foption}'>&nbsp;";
-							tegs += "<img src='content/image/order/plus.PNG' data-up='${foodinfo.foption}'></td></tr><tr><td><span style='font-size: 14px; color: gray;'><fmt:formatNumber value='${foodinfo.fprice + foodinfo.optionprice}' pattern='###,###,### 원' /> x <span data-reamountr='${foodinfo.foption}'>1</span>개</span></td><td>";
+							tegs += "</tr><tr><td>수량<input type='text' name='amount' value='1' data-amount='${foodinfo.foption}'> </td><td><img src='image/item/minus.PNG' data-down='${foodinfo.foption}'>&nbsp;";
+							tegs += "<img src='image/item/plus.PNG' data-up='${foodinfo.foption}'></td></tr><tr><td><span style='font-size: 14px; color: gray;'><fmt:formatNumber value='${foodinfo.fprice + foodinfo.optionprice}' pattern='###,###,### 원' /> x <span data-reamountr='${foodinfo.foption}'>1</span>개</span></td><td>";
 							tegs += "<span style='font-size: 20px; color: red; font-weight: bold;' data-reprice='${foodinfo.foption}'><fmt:formatNumber value='${foodinfo.fprice+foodinfo.optionprice}' pattern='###,###,###' /> 원</span>";
 							tegs += "<input type='hidden' name='foption' value='${foodinfo.foption}' data-foption='${foodinfo.foption}'><input type='hidden' name='fcode' value='${foodinfo.fcode}' data-fcode='${foodinfo.foption}'>";
 							tegs +=	"<input type='hidden' value='${foodinfo.fprice+foodinfo.optionprice}' id='opprice' data-price='${foodinfo.foption}'></td></tr></table>";
@@ -148,7 +148,7 @@
 			<form action="#" method="get">
 				<table border="1">
 					<tr>
-						<td rowspan="7"><img src="content/image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
+						<td rowspan="7"><img src="image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
 						<th>제품명</th>
 						<td><b>[${foodinfoList[0].categoryname}]</b> ${foodinfoList[0].ftitle}</td>
 					<tr>
@@ -189,7 +189,7 @@
 					</tr>
 					<tr>
 						<td colspan="3" align="center">
-							<img src="content/image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
+							<img src="image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
 						</td>
 				</table>
 			</form>
