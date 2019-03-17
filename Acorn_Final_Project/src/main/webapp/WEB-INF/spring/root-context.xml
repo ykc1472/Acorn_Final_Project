@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler/>
+	
+	<!-- 2. JDBC.properties 등록 -->
+	<context:property-placeholder location="classpath:com/config/jdbc.properties" />
+	
+	<!-- 
+		3. DBCP2 등록
+		인터넷에는 dbcp 를 썼지만, 현재는 버전업이 되어 dbcp2로 올라갔다. 
+	-->
+	<bean id="myDataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.userid}" />
+        <property name="password" value="${jdbc.passwd}" />
+    </bean>
+    
+   
+    <!-- 4. SqlSessionFactoryBean ==> 기존의 SqlsessionFactory 기능 -->
+    <bean id="mySessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="myDataSource"/>
+        <!-- 아래는 mapper를 등록하는 것이다. -->
+        <property name="mapperLocations">
+            <list>
+            	<value>classpath:com/config/MemberMapper.xml</value>
+                <value>classpath:com/config/FoodMapper.xml</value>
+                <value>classpath:com/config/CartMapper.xml</value>
+                <value>classpath:com/config/OrderMapper.xml</value>
+                <value>classpath:com/config/BoardMapper.xml</value>
+            </list>
+        </property>
+        <property name="typeAliases">
+        	<list>
+        		<value>com.dto.PagingFoodListDTO</value>
+        		<value>com.dto.FoodInfoDTO</value>
+        		<value>com.dto.MemberDTO</value>
+        		<value>com.dto.OrderDTO</value>
+        		<value>com.dto.PagingQnABoardDTO</value>
+        		<value>com.dto.QnABoardCommentDTO</value>
+        		<value>com.dto.QnABoardDTO</value>
+        	</list>
+        </property>
+    </bean>
+    
+    <!--  5. SqlSessionTemplate ==> SqlSession 을 가져오는 기능 -->
+    
+    <bean id="mySessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		 
+		<constructor-arg name="sqlSessionFactory" ref="mySessionFactory" />
+		<!-- 강제성으로 기본생성자를 만들어 두지 않았기 떄문에 mySessionFactory를 항상 injection 해주어야 한다. -->
+    </bean>
+    
+</beans>

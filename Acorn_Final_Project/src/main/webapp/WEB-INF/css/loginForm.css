@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+a.login {font-size : 9px; text-decoration:none}
+a.login:link, a.login:visited, a.login:active, a.login:hover {color:#00004d;}
+#submit {height: 70px;}
+.contnet{
+	line-height: 100px;
+}
+

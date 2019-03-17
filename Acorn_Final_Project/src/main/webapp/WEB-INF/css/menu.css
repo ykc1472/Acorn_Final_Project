@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+div.menus {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #FCFAEE;
+  padding: 10px;
+}
+
+div.center {
+	width:300px;
+	margin : auto;
+}
+.menu {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size : 15px; 
+}
+a:link, a:visited, a:active {
+	text-decoration:none;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+a.menu:link, a.menu:visited, a.menu:active, a.menu:hover {color:#00004d;}
+.menuTop {
+		font-family: 'Noto Sans KR', sans-serif;
+	font-size : 20px; 
+}
+a.menuTop:link, a.menuTop:visited, a.menuTop:active, a.menuTop:hover {color:#00004d;}
+
+img.banner {
+   resize: both; /* 이미지 최대 사이즈에 적용 */
+   float: center; /* 가운데 정렬 */
+   max-width: 500px; /* 넓이를 지정 */
+   height: auto; /* 높이를 지정 */
+   margin: 5px 0; /* 여백을 적용 4가지 조건이 가능 위쪽, 오른쪽, 아래쪽, 왼쪽 순서 */
+}
+body{
+	background-color: #FCFAEE;
+}
+
+.menus {
+	border-top: 5px ridge #F7F3DC;
+	border-bottom: 5px ridge #F9F7E8;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+}
+.topmenu {
+	position: absolute;
+	top: 0px;
+	left: 200px;
+}
+
+
