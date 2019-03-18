@@ -115,7 +115,7 @@ $(document).ready(function(){
 		}else{ 
 			$.ajax({
 				type : "POST",
-				url : "PhoneCheckServlet",
+				url : "phoneCheck",
 				dataType : "text",
 				data : {
 					phoneNumber : $("#phoneNumber").val()
@@ -157,7 +157,7 @@ $(document).ready(function(){
 		}else {
 			$.ajax({
 				type : "POST",
-				url : "NickCheckServlet",
+				url : "nickCheck",
 				dataType : "text",
 				data : {
 					nickName : $("#nickName").val()
@@ -193,7 +193,7 @@ $(document).ready(function(){
         }else{
 			$.ajax({
 				type : "POST",
-				url : "IdCheck",
+				url : "idCheck",
 				dataType : "text",
 				data : {
 					userid : $("#userid").val()
