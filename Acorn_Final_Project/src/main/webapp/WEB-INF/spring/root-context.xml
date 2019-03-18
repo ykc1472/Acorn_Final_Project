@@ -11,7 +11,7 @@
 	<mvc:default-servlet-handler/>
 	
 	<!-- 2. JDBC.properties 등록 -->
-	<context:property-placeholder location="classpath:com/config/jdbc.properties" />
+	<context:property-placeholder location="/WEB-INF/config/jdbc.properties" />
 	
 	<!-- 
 		3. DBCP2 등록
@@ -31,11 +31,11 @@
         <!-- 아래는 mapper를 등록하는 것이다. -->
         <property name="mapperLocations">
             <list>
-            	<value>classpath:com/config/MemberMapper.xml</value>
-                <value>classpath:com/config/FoodMapper.xml</value>
-                <value>classpath:com/config/CartMapper.xml</value>
-                <value>classpath:com/config/OrderMapper.xml</value>
-                <value>classpath:com/config/BoardMapper.xml</value>
+            	<value>/WEB-INF/config/MemberMapper.xml</value>
+                <value>/WEB-INF/config/FoodMapper.xml</value>
+                <value>/WEB-INF/config/CartMapper.xml</value>
+                <value>/WEB-INF/config/OrderMapper.xml</value>
+                <value>/WEB-INF/config/BoardMapper.xml</value>
             </list>
         </property>
         <property name="typeAliases">

@@ -1,28 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
 		//옵션 선택 하지 않을 경우 창이 넘어가지 않고, 알림창('장바구니추가'버튼)
 		$("#cart").on("click", function(event) {
 			var result = $("#result").html().trim();
-					if (result.length==0) {
-						alert("옵션을 선택해주세요.");
-						event.preventDefault();
-					}
-				});
+			if (result.length==0) {
+				alert("옵션을 선택해주세요.");
+				event.preventDefault();
+			}
+		});
 
 		//옵션 선택 하지 않을 경우 창이 넘어가지 않고, 알림창('주문하기'버튼)
 		$("#order").on("click", function(event) {
 			var result = $("#result").html().trim();
-					if (result.length==0) {
-						alert("옵션을 선택해주세요.");
-						event.preventDefault();
-					}
-				});
+			if (result.length==0) {
+				alert("옵션을 선택해주세요.");
+				event.preventDefault();
+			}
+		});
 
 		// 옵션 선택에 따라 테이블을 추가해주는 부분
 		$("#options").on("change", function(event){
@@ -49,7 +49,7 @@
 					alert("이미 선택하신 옵션입니다.");
 				}
 			}
-		})
+		});
 		
 		// 옵션 선택에 따라 테이블을 추가해주는 부분
 		
@@ -142,54 +142,55 @@
 	
 </script>
 <body>
-				
+
 	<div>
 		<div align="center">
 			<form action="#" method="get">
 				<table border="1">
 					<tr>
-						<td rowspan="7"><img src="image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
+						<td rowspan="7"><img
+							src="image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
 						<th>제품명</th>
-						<td><b>[${foodinfoList[0].categoryname}]</b> ${foodinfoList[0].ftitle}</td>
+						<td><b>[${foodinfoList[0].categoryname}]</b>
+							${foodinfoList[0].ftitle}</td>
 					<tr>
 					<tr>
 						<th>가격</th>
-						<td><fmt:formatNumber value="${foodinfoList[0].fprice}" pattern="###,###,### 원" /></td>
+						<td><fmt:formatNumber value="${foodinfoList[0].fprice}"
+								pattern="###,###,### 원" /></td>
 					</tr>
 					<tr>
 						<th>옵션</th>
-						<td>
-							<select id="options">
+						<td><select id="options">
 								<option value="#">옵션을 선택하세요.</option>
 								<c:forEach var="foodinfo" items="${foodinfoList}">
-									<option value="${foodinfo.foption}">[옵션 ${foodinfo.foption} : ${foodinfo.optionname} 
-									(<fmt:formatNumber value="${foodinfo.optionprice}" pattern="###,###,### 원" />)] /
-									재고 : ${foodinfo.stock} 개</option>
+									<option value="${foodinfo.foption}">[옵션
+										${foodinfo.foption} : ${foodinfo.optionname} (
+										<fmt:formatNumber value="${foodinfo.optionprice}"
+											pattern="###,###,### 원" />)] / 재고 : ${foodinfo.stock} 개
+									</option>
 								</c:forEach>
-							</select>
-						</td>
+						</select></td>
 					</tr>
 					<tr>
 						<th>정보</th>
 						<td>
 							<!-- 여기에 옵션 목록 추가 -->
-							<div id="result">
-							</div>
-							<!-- 여기까지  -->
+							<div id="result"></div> <!-- 여기까지  -->
 						</td>
 					</tr>
 					<tr>
 						<th>Total</th>
-						<td align="right"><b><span id="priceTotal" style="color: blue; font-size: 20px"></span></b></td>
+						<td align="right"><b><span id="priceTotal"
+								style="color: blue; font-size: 20px"></span></b></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<input type="submit" id="order" value="주문하기"> <input type="submit" id="cart" value="장바구니 추가">
-						</td>
+						<td colspan="2"><input type="submit" id="order" value="주문하기">
+							<input type="submit" id="cart" value="장바구니 추가"></td>
 					</tr>
 					<tr>
-						<td colspan="3" align="center">
-							<img src="image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
+						<td colspan="3" align="center"><img
+							src="image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
 						</td>
 				</table>
 			</form>

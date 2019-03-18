@@ -35,7 +35,7 @@
 				<a href="memberForm.jsp" class="menuTop">회원가입</a>&nbsp;
 			</c:otherwise>
 		</c:choose>
-		<div align="center"><a href="main"><img src="image/order/mainBanner.jpg" width = "200"></a>
+		<div align="center"><a href="main"><img src="image/item/mainBanner.jpg" width = "200"></a>
 		
 		</div>
 		<div>
