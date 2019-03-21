@@ -12,10 +12,9 @@ public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		
+		System.out.println("preHandle");
 		if(session.getAttribute("loginInfo") == null) {
-			response.sendRedirect("../");
-			
+			response.sendRedirect("/Final_Project/loginUI");
 			return false;
 		}
 		return super.preHandle(request, response, handler);

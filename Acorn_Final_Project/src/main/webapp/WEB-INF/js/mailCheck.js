@@ -6,10 +6,10 @@ var email
 			$(this).val("인증번호 재전송");
 			$.ajax({
 				type : "GET",
-				url : "../EmailCheck",
+				url : "/Final_Project/emailCheck",
 				dataType : "text",
 				data : {
-					userEmail : $("#userEmail").val()
+					useremail : $("#userEmail").val()
 				},
 				success : function(Data, status, xhr) {
 					var x = "<table><tr><th style='width:120px;'>인증번호</th><td style='width:200px;'><input type='text' name='checker' maxlength='10' id='checker'>";
@@ -22,6 +22,9 @@ var email
 				},
 				error : function(xhr, status, error) {
 					console.log("error");
+					console.log(error);
+					console.log(xhr);
+					console.log(status);
 				}
 			})
 		})
