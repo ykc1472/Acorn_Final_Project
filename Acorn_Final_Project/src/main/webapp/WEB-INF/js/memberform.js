@@ -8,7 +8,7 @@ var nickName_check = false;		//
 $(document).ready(function(){
 	$("#domain").on("change", function(event){
 		// 이메일 입력 기능 Start
-		var email = $("[name='userEMail']").val();
+		var email = $("[name='email']").val();
 		if($(this).val){
 			if(email.indexOf('@') == -1 ){
 				email = email +  '@' + $(this).val();
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		} else {
 				email = email.substr(0, email.indexOf('@'))+ '@';
 		}
-		$("[name='userEMail']").val(email);
+		$("[name='email']").val(email);
 		// 이메일 입력 기능 End
 	})
 	
@@ -142,7 +142,7 @@ $(document).ready(function(){
 		
 	$("#email_certification").on("click", function(event){
 		// 이메일 인증하기 새창열기
-		childWin = window.open("member/mailCheck.jsp","child","width=485, height=300");
+		childWin = window.open("member/mailCheck","child","width=485, height=300");
 		
 		// 이메일 인증하기 새창열기 End
 	})
@@ -250,7 +250,7 @@ $(document).ready(function(){
 				alert("휴대폰 번호를 확인해 해주세요.");
 				$("#phoneNumber").focus();
 			}else if(!email_check){
-				$("[name='userEMail']").focus();
+				$("[name='email']").focus();
 				alert("E Mail인증을 해주세요.");
 			} 
 		} else {

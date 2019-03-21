@@ -1,15 +1,15 @@
 var email
 	var checkNum;
 	$(document).ready(function(){
-		$("#userEmail").val(opener.$("[name='userEMail']").val());
+		$("#userEmail").val(opener.$("[name='email']").val());
 		$("#check").on("click", function(event){
 			$(this).val("인증번호 재전송");
 			$.ajax({
 				type : "GET",
-				url : "../EmailCheck",
+				url : "/Final_Project/emailCheck",
 				dataType : "text",
 				data : {
-					userEmail : $("#userEmail").val()
+					useremail : $("#userEmail").val()
 				},
 				success : function(Data, status, xhr) {
 					var x = "<table><tr><th style='width:120px;'>인증번호</th><td style='width:200px;'><input type='text' name='checker' maxlength='10' id='checker'>";
@@ -22,6 +22,9 @@ var email
 				},
 				error : function(xhr, status, error) {
 					console.log("error");
+					console.log(error);
+					console.log(xhr);
+					console.log(status);
 				}
 			})
 		})
@@ -39,7 +42,7 @@ var email
 		})
 		$("body").on("click", "#using" ,function(event){
 			if($("#checker").val() == checkNum){
-				opener.$("[name='userEMail']").attr("readonly", true);
+				opener.$("[name='email']").attr("readonly", true);
 				opener.$("#domain").attr("hidden", true);
 				opener.$("#email_certification").attr("hidden", true);
 				opener.email_check = true;
