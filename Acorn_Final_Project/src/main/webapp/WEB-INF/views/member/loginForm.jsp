@@ -27,7 +27,7 @@
 </script>
 
 <div align="center" class="content">
-	<form action="loginAction" method="get">
+	<form action="loginAction" method="post">
 		<table border="1">
 			<tr>
 				<td><input type="text" name="userid" id="userid"></td>

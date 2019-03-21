@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="content/js/memberform.js"></script>
-<script type="text/javascript" src="content/js/postAddress.js"></script>
-<link rel="stylesheet" href="content/css/memberForm.css">
+<script type="text/javascript" src="js/memberform.js"></script>
+<script type="text/javascript" src="js/postAddress.js"></script>
+<link rel="stylesheet" href="css/memberForm.css">
 <script type="text/javascript">
 
 </script>
 <div align="center">
-	<form action="UserAdd" method="post">
+	<form action="userAdd" method="post">
 		<table border="1">
 			<tr>
 				<th>아이디 :</th>

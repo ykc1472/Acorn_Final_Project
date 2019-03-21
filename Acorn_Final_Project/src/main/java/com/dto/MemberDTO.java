@@ -26,7 +26,7 @@ public class MemberDTO {
 	public MemberDTO(String userid, String userpw, String username, String usernickname, String email, String phone,
 			String address_post, String address_f, String address_l, int grade, Date usersingupdate) {
 		super();
-		this.userid = userid;
+		this.userid = userid.toLowerCase();
 		this.userpw = userpw;
 		this.username = username;
 		this.usernickname = usernickname;
@@ -42,7 +42,7 @@ public class MemberDTO {
 	public MemberDTO(String userid, String userpw, String username, String usernickname, String email, String phone,
 			String address_post, String address_f, String address_l) {
 		super();
-		this.userid = userid;
+		this.userid = userid.toLowerCase();
 		this.userpw = userpw;
 		this.username = username;
 		this.usernickname = usernickname;
@@ -55,7 +55,7 @@ public class MemberDTO {
 
 	public MemberDTO(String userid, String userpw) {
 		super();
-		this.userid = userid;
+		this.userid = userid.toLowerCase();
 		this.userpw = userpw;
 	}
 
@@ -64,7 +64,7 @@ public class MemberDTO {
 	}
 
 	public void setUserid(String userid) {
-		this.userid = userid;
+		this.userid = userid.toLowerCase();
 	}
 
 	public String getUserpw() {

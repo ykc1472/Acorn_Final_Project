@@ -115,7 +115,7 @@ $(document).ready(function(){
 		}else{ 
 			$.ajax({
 				type : "POST",
-				url : "PhoneCheckServlet",
+				url : "phoneCheck",
 				dataType : "text",
 				data : {
 					phoneNumber : $("#phoneNumber").val()
@@ -142,7 +142,7 @@ $(document).ready(function(){
 		
 	$("#email_certification").on("click", function(event){
 		// 이메일 인증하기 새창열기
-		childWin = window.open("member/mailCheck.jsp","child","width=485, height=300");
+		childWin = window.open("member/mailCheck","child","width=485, height=300");
 		
 		// 이메일 인증하기 새창열기 End
 	})
@@ -157,7 +157,7 @@ $(document).ready(function(){
 		}else {
 			$.ajax({
 				type : "POST",
-				url : "NickCheckServlet",
+				url : "nickCheck",
 				dataType : "text",
 				data : {
 					nickName : $("#nickName").val()
@@ -193,7 +193,7 @@ $(document).ready(function(){
         }else{
 			$.ajax({
 				type : "POST",
-				url : "IdCheck",
+				url : "idCheck",
 				dataType : "text",
 				data : {
 					userid : $("#userid").val()

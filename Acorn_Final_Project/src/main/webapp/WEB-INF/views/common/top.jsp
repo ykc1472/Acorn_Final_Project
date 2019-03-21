@@ -32,7 +32,7 @@
 		
 			<c:otherwise>
 				<a href="loginForm" class="menuTop">로그인</a>&nbsp;&nbsp;
-				<a href="memberForm.jsp" class="menuTop">회원가입</a>&nbsp;
+				<a href="memberForm" class="menuTop">회원가입</a>&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<div align="center"><a href="main"><img src="image/item/mainBanner.jpg" width = "200"></a>
