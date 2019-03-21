@@ -8,7 +8,7 @@
 
 </script>
 <div align="center">
-	<form action="userAdd" method="post">
+	<form action="userAdd" method="get">
 		<table border="1">
 			<tr>
 				<th>아이디 :</th>
@@ -28,19 +28,19 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td colspan="2"><input type="text" name="userName"><br></td>
+				<td colspan="2"><input type="text" name="username"><br></td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
 				<td>
-					<input type="text" name="nickName" id="nickName"><br>
+					<input type="text" name="usernickname" id="nickName"><br>
 					<span id="nickCheckResult" style="font-size: 9px; color: red;">&nbsp;</span>
 				</td>
 				<td><input type="button" id="nickCheck" value="중복검사"><br></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="email" name="userEMail"> 
+				<td><input type="email" name="email"> 
 				<select	id="domain">
 						<option value="">직접입력</option>
 						<option value="naver.com">naver.com</option>
@@ -56,23 +56,23 @@
 			</tr>
 			<tr>
 				<th>휴대폰 번호</th>
-				<td colspan="2"><input type="text" name="userPhoneNum" maxlength="11" placeholder="- 없이 입력하세요." id="phoneNumber"><br> 
+				<td colspan="2"><input type="text" name="phone" maxlength="11" placeholder="- 없이 입력하세요." id="phoneNumber"><br> 
 					<span id="phoneCheck" style="font-size: 9px;">&nbsp;</span>
 				</td>
 			</tr>
 			<tr>
 				<th rowspan="3">주소</th>
-				<td colspan="2"><input type="text" name="post" id="postcode"
+				<td colspan="2"><input type="text" name="address_post" id="postcode"
 					placeholder="우편번호"> <input type="button"
 					onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" name="addr1" id="roadAddress"
+				<td colspan="2"><input type="text" name="address_f" id="roadAddress"
 					placeholder="도로명주소"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" name="addr2" id="jibunAddress"
+				<td colspan="2"><input type="text" name="address_l" id="jibunAddress"
 					placeholder="지번주소"><span id="guide" style="color:#999"></span></td>
 			</tr>
 			<tr>

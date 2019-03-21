@@ -40,9 +40,9 @@
         </property>
         <property name="typeAliases">
         	<list>
+        		<value>com.dto.MemberDTO</value>
         		<value>com.dto.PagingFoodListDTO</value>
         		<value>com.dto.FoodInfoDTO</value>
-        		<value>com.dto.MemberDTO</value>
         		<value>com.dto.OrderDTO</value>
         		<value>com.dto.PagingQnABoardDTO</value>
         		<value>com.dto.QnABoardCommentDTO</value>

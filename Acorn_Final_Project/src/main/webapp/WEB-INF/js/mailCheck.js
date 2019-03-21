@@ -1,7 +1,7 @@
 var email
 	var checkNum;
 	$(document).ready(function(){
-		$("#userEmail").val(opener.$("[name='userEMail']").val());
+		$("#userEmail").val(opener.$("[name='email']").val());
 		$("#check").on("click", function(event){
 			$(this).val("인증번호 재전송");
 			$.ajax({
@@ -42,7 +42,7 @@ var email
 		})
 		$("body").on("click", "#using" ,function(event){
 			if($("#checker").val() == checkNum){
-				opener.$("[name='userEMail']").attr("readonly", true);
+				opener.$("[name='email']").attr("readonly", true);
 				opener.$("#domain").attr("hidden", true);
 				opener.$("#email_certification").attr("hidden", true);
 				opener.email_check = true;

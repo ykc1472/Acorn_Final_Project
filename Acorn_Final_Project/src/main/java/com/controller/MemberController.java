@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dto.MailDTO;
 import com.dto.MemberDTO;
@@ -23,14 +23,17 @@ public class MemberController {
 	MemberService service;
 
 	@RequestMapping("/userAdd")
-	public String UserInsert(@RequestParam MemberDTO dto, @ModelAttribute("mesg") String mesg) {
+	public String UserInsert(MemberDTO dto, Model m) {
+		System.out.println(dto);
+		
 		int success = service.userAdd(dto);
 
 		if (success == 1) {
-			mesg = "회원가입에 성공하셨습니다.";
+			m.addAttribute("mesg", "회원가입에 성공하셨습니다.");
 		} else {
-			mesg = "회원가입에 실패하셨습니다. 다시 시도해 주세요.";
+			m.addAttribute("mesg", "회원가입에 실패하셨습니다. 다시 시도해 주세요.");
 		}
+		
 		return "loginForm";
 	}
 
@@ -122,19 +125,31 @@ public class MemberController {
 				session.removeAttribute("backPage");
 			}
 			else {
-				nextPage = "main";
+				nextPage = "redirect:main";
 			}
 		}
 		
 		return nextPage;
 	}
 	
-	@RequestMapping("loginCheck/Logout")
-	public String logout(Model m, HttpSession session) {
+	@RequestMapping("/loginCheck/logout")
+	public String logout(HttpSession session) {
 		
-		m.addAttribute("mesg", ((MemberDTO)session.getAttribute("loginInfo")).getusernickname() +"님 정상적으로 로그아웃 되었습니다.");
+		session.setAttribute("mesg", ((MemberDTO)session.getAttribute("loginInfo")).getUsernickname() +"님 정상적으로 로그아웃 되었습니다.");
 		session.removeAttribute("loginInfo");
 		
-		return "redirect:main";
+		return "redirect:../main";
+	}
+	
+	@RequestMapping("/nickCheck")
+	public @ResponseBody int nickCheck(@RequestParam("nickName") String nickName) {
+		
+		return service.nickNameCheck(nickName);
+	}
+	
+	@RequestMapping("phoneCheck")
+	public @ResponseBody int phoneCheck(@RequestParam("phoneNumber") String phoneNumber) {
+	
+		return service.phoneNumberCheck(phoneNumber);
 	}
 }
