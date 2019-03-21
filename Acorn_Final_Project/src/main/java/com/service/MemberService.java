@@ -48,7 +48,7 @@ public class MemberService {
 	public MemberDTO loginAction (MemberDTO dto) {
 		MemberDTO loginInfo = null;
 		loginInfo = dao.loginAction(dto);
-	
+		System.out.println(loginInfo);
 		return loginInfo;
 	}
 	

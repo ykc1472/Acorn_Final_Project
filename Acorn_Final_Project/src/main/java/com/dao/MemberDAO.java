@@ -30,7 +30,7 @@ public class MemberDAO {
 	
 	public int userAdd(MemberDTO dto) {
 		System.out.println(dto);
-		return template.insert("MemberMapper.userAdd", dto);
+		return template.insert("MemberMapper.userAdd");
 	}
 	
 	public MemberDTO loginAction(MemberDTO dto) {
