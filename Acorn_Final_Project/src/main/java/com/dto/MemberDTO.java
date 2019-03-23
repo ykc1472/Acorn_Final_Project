@@ -23,8 +23,6 @@ public class MemberDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public MemberDTO(String userid, String userpw, String username, String usernickname, String email, String phone,
 			String address_post, String address_f, String address_l) {
 		super();
@@ -39,13 +37,11 @@ public class MemberDTO {
 		this.address_l = address_l;
 	}
 
-
 	public MemberDTO(String userid, String userpw) {
 		super();
 		this.userid = userid;
 		this.userpw = userpw;
 	}
-
 
 	public String getUserid() {
 		return userid;
@@ -142,7 +138,5 @@ public class MemberDTO {
 				+ ", address_f=" + address_f + ", address_l=" + address_l + ", grade=" + grade + ", usersingupdate="
 				+ usersingupdate + "]";
 	}
-
-
 
 }

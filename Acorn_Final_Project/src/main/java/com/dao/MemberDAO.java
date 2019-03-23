@@ -2,7 +2,6 @@ package com.dao;
 
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,12 +28,10 @@ public class MemberDAO {
 	}
 	
 	public int userAdd(MemberDTO dto) {
-		System.out.println(dto);
-		return template.insert("MemberMapper.userAdd");
+		return template.insert("MemberMapper.userAdd", dto);
 	}
 	
 	public MemberDTO loginAction(MemberDTO dto) {
-	
 		return template.selectOne("MemberMapper.loginAction", dto);
 	}
 
