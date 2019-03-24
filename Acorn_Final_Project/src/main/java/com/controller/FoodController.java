@@ -1,8 +1,9 @@
 package com.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.FoodInfoDTO;
@@ -77,5 +79,27 @@ public class FoodController {
 		mav.setViewName("mesg/message");
 		return mav;
 		
+	}
+	@RequestMapping(value="/searchingFood", method=RequestMethod.POST)
+	public @ResponseBody List<HashMap<String, String>> searchingFood(@RequestParam("search") String search) {
+		System.out.println(service.searchFoodList(search));
+		return service.searchFoodList(search);
+	}
+
+	@RequestMapping(value="/searchingFoodList", method=RequestMethod.GET)
+	public String searchingFoodList(@RequestParam(value="search", required=false) String ftitle, @ModelAttribute("flist") PagingFoodListDTO paging, HttpServletRequest request) {
+		System.out.println(ftitle);
+		System.out.println(paging);
+		String nextPage = null;
+		if(ftitle != null) {
+			paging.setFtitle(ftitle);
+			paging = service.searchingList(paging);
+			nextPage = "foodListForm";
+			request.setAttribute("flist", paging);
+		}else {
+			request.setAttribute("mesg", "잘못된 접근입니다.");
+			nextPage = "forward:main";
+		}
+		return nextPage;
 	}
 }

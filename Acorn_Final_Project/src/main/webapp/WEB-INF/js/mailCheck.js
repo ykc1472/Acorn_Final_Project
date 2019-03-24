@@ -43,6 +43,7 @@ var email
 		$("body").on("click", "#using" ,function(event){
 			if($("#checker").val() == checkNum){
 				opener.$("[name='email']").attr("readonly", true);
+				opener.$("[name='email']").val($("#userEmail").val());
 				opener.$("#domain").attr("hidden", true);
 				opener.$("#email_certification").attr("hidden", true);
 				opener.email_check = true;

@@ -42,7 +42,6 @@ public class OrderDAO {
 		
 		int success = 0;
 		for(OrderDTO order : orderList) {
-			
 			success += template.insert("OrderMapper.orderAllDone", order);
 		}
 		

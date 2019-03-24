@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<script type="text/javascript" src="content/js/postAddress.js"></script>	
+<script type="text/javascript" src="/Final_Project/js/postAddress.js"></script>	
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -115,7 +115,7 @@
 						<td class="td_default" width="80" align="center">${i.count}
 						<input type="hidden" value="${order.foption}" name="foption" id="foption"><input type="hidden" value="${order.fcode}" name="fcode" id="fcode">
 						</td>
-						<td class="td_default" width="80" align="center"><img src="content/image/food/${order.fmainimage}.jpg" border="0" width="80"></td>
+						<td class="td_default" width="80" align="center"><img src="/Final_Project/image/food/${order.fmainimage}.jpg" border="0" width="80"></td>
 						<td class="td_default" width="500" style="padding-left: 30px">${order.ftitle}
 						<br>${order.content}
 						<br><font size="2" color="#665b5f">[옵션  ${order.foption}: ${order.optionname}]</font></td>
