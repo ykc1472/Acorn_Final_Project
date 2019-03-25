@@ -47,7 +47,7 @@
 	</bean>
 	
 	<!-- 컨트롤러를 들리지 않고 직접 이동하는 녀석들... -->
-	<mvc:view-controller path="/memberForm" view-name="memberForm" />
+	<mvc:view-controller path="/captcha/memberForm" view-name="memberForm" />
 	<mvc:view-controller path="/loginForm" view-name="loginForm" />
 	<mvc:view-controller path="/" view-name="main" />
 	<mvc:view-controller path="/main" view-name="main" />
@@ -59,6 +59,10 @@
     	<mvc:interceptor>
     		<mvc:mapping path="/loginCheck/**"/>
     		<bean class="com.interceptor.LoginCheckIntercepter" />
+    	</mvc:interceptor>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/captcha/**"/>
+    		<bean class="com.interceptor.CaptchaIntercepter" />
     	</mvc:interceptor>
     </mvc:interceptors>
 

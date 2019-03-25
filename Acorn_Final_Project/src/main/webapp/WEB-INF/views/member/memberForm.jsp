@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="js/memberform.js"></script>
-<script type="text/javascript" src="js/postAddress.js"></script>
-<link rel="stylesheet" href="css/memberForm.css">
+<script type="text/javascript" src="/Final_Project/js/memberform.js"></script>
+<script type="text/javascript" src="/Final_Project/js/postAddress.js"></script>
+<link rel="stylesheet" href="/Final_Project/css/memberForm.css">
 <script type="text/javascript">
 
 </script>
@@ -74,6 +74,17 @@
 			<tr>
 				<td colspan="2"><input type="text" name="address_l" id="jibunAddress"
 					placeholder="지번주소"><span id="guide" style="color:#999"></span></td>
+			</tr>
+			<tr>
+				<th>자동가입방지</th>
+				<td colspan="2" align="center" id="captchacheck">
+					<input type="hidden" name="key" id="key" value="${key}">
+					<input type="text" name="input_captcha" id="input_captcha">
+					<input type="button" id="captcha" value="확인">
+					<div>
+						<img id="captcha" src="/image/${img}">
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center"><input type="submit"

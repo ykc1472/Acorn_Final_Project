@@ -83,7 +83,7 @@ public class FoodController {
 	}
 	@RequestMapping(value="/searchingFood", method=RequestMethod.POST)
 	public @ResponseBody List<HashMap<String, String>> searchingFood(@RequestParam("search") String search) {
-		System.out.println(service.searchFoodList(search));
+		
 		return service.searchFoodList(search);
 	}
 
