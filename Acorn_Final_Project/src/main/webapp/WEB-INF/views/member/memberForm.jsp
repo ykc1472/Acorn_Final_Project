@@ -8,7 +8,7 @@
 
 </script>
 <div align="center">
-	<form action="userAdd" method="get">
+	<form action="userAdd" method="post">
 		<table border="1">
 			<tr>
 				<th>아이디 :</th>
@@ -78,11 +78,11 @@
 			<tr>
 				<th>자동가입방지</th>
 				<td colspan="2" align="center" id="captchacheck">
-					<input type="hidden" name="key" id="key" value="${key}">
+					<input type="hidden" name="key" id="key">
 					<input type="text" name="input_captcha" id="input_captcha">
 					<input type="button" id="captcha" value="확인">
 					<div>
-						<img id="captcha" src="/image/${img}">
+						<img id="captchaImg" src="">
 					</div>
 				</td>
 			</tr>

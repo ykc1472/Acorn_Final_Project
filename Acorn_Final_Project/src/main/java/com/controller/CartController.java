@@ -21,7 +21,7 @@ public class CartController {
 	@Autowired
 	CartService service;
 	
-	@RequestMapping("/cartAdd")
+	@RequestMapping("/loginCheck/cartAdd")
 	public String cartAdd(@RequestParam(value="amount", required=false) int[] amount, @RequestParam(value="fcode", required=false) String[] fcode, @RequestParam(value="foption", required=false) int[] foption,
 			HttpServletRequest request, HttpSession session) {
 		
@@ -29,7 +29,7 @@ public class CartController {
 		String mesg = null;
 		if(amount == null || fcode == null || foption == null) {
 			mesg = "잘못된 접근입니다.";
-			nextPage = "main.jsp";
+			nextPage = "main";
 			request.setAttribute("mesg", mesg);
 		}
 		String userid = ((MemberDTO)session.getAttribute("loginInfo")).getUserid();
@@ -44,14 +44,16 @@ public class CartController {
 			nextPage = "cartAddForm";
 		} else {
 			nextPage = request.getHeader("referer");
+			System.out.println(nextPage);
 			nextPage = nextPage.substring(nextPage.indexOf(request.getContextPath())+request.getContextPath().length()+1, nextPage.length());
+			System.out.println(nextPage);
 			mesg = list.size()+"개의  등록된 같은 제품이 있습니다.";
 			session.setAttribute("mesg", mesg);
 		}
 		return nextPage;
 	}
 
-	@RequestMapping("/cartList")
+	@RequestMapping("/loginCheck/cartList")
 	public String cartList(HttpServletRequest request, HttpSession session) {
 	String nextPage = null;
 	

@@ -7,6 +7,7 @@ var nickName_check = false;		//
 var captcha_check = false;		//
 
 $(document).ready(function(){
+	getCaptcha();
 	$("#domain").on("change", function(event){
 		// 이메일 입력 기능 Start
 		var email = $("[name='email']").val();
@@ -143,7 +144,7 @@ $(document).ready(function(){
 		
 	$("#email_certification").on("click", function(event){
 		// 이메일 인증하기 새창열기
-		childWin = window.open("member/mailCheck","child","width=485, height=300");
+		childWin = window.open("/Final_Project/member/mailCheck","child","width=485, height=300");
 		
 		// 이메일 인증하기 새창열기 End
 	})
@@ -285,8 +286,10 @@ $(document).ready(function(){
 				captcha_check = Data.result;
 				console.log(Data);
 				if(Data.result == true){
-					$("#captchacheck").html("<img id='smile' src='image/smile.png'>");
+					$("#captchacheck").html("<img id='smile' src='/Final_Project/image/item/smile.png'>");
 				} else{
+					$("#input_captcha").val("");
+					alert("자동가입방지 문자가 틀렸습니다.");
 					getCaptcha();
 				}
 			},
@@ -296,14 +299,12 @@ $(document).ready(function(){
 		})
 	})
 	function getCaptcha(){
-		console.log("돈다");
 		$.ajax({
 			type : "POST",
 			url : "/Final_Project/getCaptcha",
 			dataType : "json",
 			success : function(Data, status, xhr) {
-				console.log(Data.img);
-				$("#captcha").attr("src", "/image/"+Data.img);
+				$("#captchaImg").attr("src", "/image/"+Data.img);
 				$("#key").val(Data.key);
 			},
 			error : function(xhr, status, error) {

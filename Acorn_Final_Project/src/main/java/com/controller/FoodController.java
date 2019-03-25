@@ -104,15 +104,16 @@ public class FoodController {
 		return nextPage;
 	}
 	
-	@RequestMapping("newFoodList")
-	public String newFoodList(@RequestParam PagingFoodListDTO paging, HttpServletRequest request) {
-		
-		String nextPage = null;
-		
+	@RequestMapping("/newFoodList")
+	public String newFoodList(@RequestParam(value="page", required=false, defaultValue="0") int page, HttpServletRequest request) {
+		PagingFoodListDTO paging = new PagingFoodListDTO();
+		if(page != 0) {
+			paging.setPage(page);
+		}
+		System.out.println(paging);
 		paging = service.foodList(paging);
 		request.setAttribute("flist", paging);
-		nextPage = "foodListForm";
 		
-		return nextPage;
+		return "foodListForm";
 	}
 }
