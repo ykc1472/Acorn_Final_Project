@@ -3,6 +3,7 @@ package com.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,18 @@ public class FoodController {
 			request.setAttribute("mesg", "잘못된 접근입니다.");
 			nextPage = "forward:main";
 		}
+		return nextPage;
+	}
+	
+	@RequestMapping("newFoodList")
+	public String newFoodList(@RequestParam PagingFoodListDTO paging, HttpServletRequest request) {
+		
+		String nextPage = null;
+		
+		paging = service.foodList(paging);
+		request.setAttribute("flist", paging);
+		nextPage = "foodListForm";
+		
 		return nextPage;
 	}
 }
