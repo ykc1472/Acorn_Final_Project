@@ -35,7 +35,6 @@ public class MailController {
 		};
 		mailSender.send(preparator);
 		m.addAttribute("mesg", mailInfo.getRandomMessage());
-		System.out.println(mailInfo.getNextPage());
 		return mailInfo.getNextPage();
 	}
 }

@@ -24,22 +24,6 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String userid, String userpw, String username, String usernickname, String email, String phone,
-			String address_post, String address_f, String address_l, int grade, Date usersingupdate) {
-		super();
-		this.userid = userid.toLowerCase();
-		this.userpw = userpw;
-		this.username = username;
-		this.usernickname = usernickname;
-		this.email = email;
-		this.phone = phone;
-		this.address_post = address_post;
-		this.address_f = address_f;
-		this.address_l = address_l;
-		this.grade = grade;
-		this.usersingupdate = usersingupdate;
-	}
-
-	public MemberDTO(String userid, String userpw, String username, String usernickname, String email, String phone,
 			String address_post, String address_f, String address_l) {
 		super();
 		this.userid = userid.toLowerCase();
@@ -55,7 +39,7 @@ public class MemberDTO {
 
 	public MemberDTO(String userid, String userpw) {
 		super();
-		this.userid = userid.toLowerCase();
+		this.userid = userid;
 		this.userpw = userpw;
 	}
 
@@ -64,7 +48,7 @@ public class MemberDTO {
 	}
 
 	public void setUserid(String userid) {
-		this.userid = userid.toLowerCase();
+		this.userid = userid;
 	}
 
 	public String getUserpw() {
@@ -83,11 +67,11 @@ public class MemberDTO {
 		this.username = username;
 	}
 
-	public String getusernickname() {
+	public String getUsernickname() {
 		return usernickname;
 	}
 
-	public void setusernickname(String usernickname) {
+	public void setUsernickname(String usernickname) {
 		this.usernickname = usernickname;
 	}
 

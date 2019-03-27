@@ -45,7 +45,7 @@
 							priceTotal();
 						}
 					</c:forEach>
-				} else{
+				} else {
 					alert("이미 선택하신 옵션입니다.");
 				}
 			}
@@ -102,14 +102,15 @@
 					console.log("error");
 				}
 			})
-		}
+		};
 		
 		$("body").on("click","[data-delete]", function(event){
 			// 옵션 삭제
 			$("#"+$(this).attr("data-delete")).remove();
 			priceTotal();
 			
-		})
+		});
+		
 		function priceTotal(){
 			var totalPrice = 0;
 			var text = "";
@@ -127,73 +128,69 @@
 				totalPrice += (amounts[i] * price[i]);
 			}
 			$("#priceTotal").text(totalPrice.toLocaleString()+ "원");
-			
-	
-		}
+		};
+		
 		$("[type='submit']").on("click", function(){
 			if($(this).attr("id") == "order"){
-				$("form").attr("action", "orderConfirm");
+				$("form").attr("action", "loginCheck/orderConfirm");
 				
 			} else if($(this).attr("id") == "cart"){
-				$("form").attr("action", "cartAdd");
+				$("form").attr("action", "loginCheck/cartAdd");
 			}
-		})
+		});
 	})
 	
 </script>
-<body>
-
-	<div>
-		<div align="center">
-			<form action="#" method="get">
-				<table border="1">
-					<tr>
-						<td rowspan="7"><img
-							src="image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
-						<th>제품명</th>
-						<td><b>[${foodinfoList[0].categoryname}]</b>
-							${foodinfoList[0].ftitle}</td>
-					<tr>
-					<tr>
-						<th>가격</th>
-						<td><fmt:formatNumber value="${foodinfoList[0].fprice}"
-								pattern="###,###,### 원" /></td>
-					</tr>
-					<tr>
-						<th>옵션</th>
-						<td><select id="options">
-								<option value="#">옵션을 선택하세요.</option>
-								<c:forEach var="foodinfo" items="${foodinfoList}">
-									<option value="${foodinfo.foption}">[옵션
-										${foodinfo.foption} : ${foodinfo.optionname} (
-										<fmt:formatNumber value="${foodinfo.optionprice}"
-											pattern="###,###,### 원" />)] / 재고 : ${foodinfo.stock} 개
-									</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<th>정보</th>
-						<td>
-							<!-- 여기에 옵션 목록 추가 -->
-							<div id="result"></div> <!-- 여기까지  -->
-						</td>
-					</tr>
-					<tr>
-						<th>Total</th>
-						<td align="right"><b><span id="priceTotal"
-								style="color: blue; font-size: 20px"></span></b></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="submit" id="order" value="주문하기">
-							<input type="submit" id="cart" value="장바구니 추가"></td>
-					</tr>
-					<tr>
-						<td colspan="3" align="center"><img
-							src="image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
-						</td>
-				</table>
-			</form>
-		</div>
+<div>
+	<div align="center">
+		<form action="#" method="get">
+			<table border="1">
+				<tr>
+					<td rowspan="7"><img
+						src="image/food/${foodinfoList[0].fmainimage}.jpg" class="goods" /></td>
+					<th>제품명</th>
+					<td><b>[${foodinfoList[0].categoryname}]</b>
+						${foodinfoList[0].ftitle}</td>
+				<tr>
+				<tr>
+					<th>가격</th>
+					<td><fmt:formatNumber value="${foodinfoList[0].fprice}"
+							pattern="###,###,### 원" /></td>
+				</tr>
+				<tr>
+					<th>옵션</th>
+					<td><select id="options">
+							<option value="#">옵션을 선택하세요.</option>
+							<c:forEach var="foodinfo" items="${foodinfoList}">
+								<option value="${foodinfo.foption}">[옵션
+									${foodinfo.foption} : ${foodinfo.optionname} (
+									<fmt:formatNumber value="${foodinfo.optionprice}"
+										pattern="###,###,### 원" />)] / 재고 : ${foodinfo.stock} 개
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<th>정보</th>
+					<td>
+						<!-- 여기에 옵션 목록 추가 -->
+						<div id="result"></div> <!-- 여기까지  -->
+					</td>
+				</tr>
+				<tr>
+					<th>Total</th>
+					<td align="right"><b><span id="priceTotal"
+							style="color: blue; font-size: 20px"></span></b></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" id="order" value="주문하기">
+						<input type="submit" id="cart" value="장바구니 추가"></td>
+				</tr>
+				<tr>
+					<td colspan="3" align="center"><img
+						src="image/food/${foodinfoList[0].fimage}.jpg" class="goods" />
+					</td>
+			</table>
+		</form>
 	</div>
-</body>
+</div>

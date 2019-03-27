@@ -4,11 +4,13 @@ var id_check = false;			//
 var pw_check = false;			//
 var phone_check = false;		//
 var nickName_check = false;		//
+var captcha_check = false;		//
 
 $(document).ready(function(){
+	getCaptcha();
 	$("#domain").on("change", function(event){
 		// 이메일 입력 기능 Start
-		var email = $("[name='userEMail']").val();
+		var email = $("[name='email']").val();
 		if($(this).val){
 			if(email.indexOf('@') == -1 ){
 				email = email +  '@' + $(this).val();
@@ -18,7 +20,7 @@ $(document).ready(function(){
 		} else {
 				email = email.substr(0, email.indexOf('@'))+ '@';
 		}
-		$("[name='userEMail']").val(email);
+		$("[name='email']").val(email);
 		// 이메일 입력 기능 End
 	})
 	
@@ -115,7 +117,7 @@ $(document).ready(function(){
 		}else{ 
 			$.ajax({
 				type : "POST",
-				url : "phoneCheck",
+				url : "/Final_Project/phoneCheck",
 				dataType : "text",
 				data : {
 					phoneNumber : $("#phoneNumber").val()
@@ -142,7 +144,7 @@ $(document).ready(function(){
 		
 	$("#email_certification").on("click", function(event){
 		// 이메일 인증하기 새창열기
-		childWin = window.open("member/mailCheck","child","width=485, height=300");
+		childWin = window.open("/Final_Project/member/mailCheck","child","width=485, height=300");
 		
 		// 이메일 인증하기 새창열기 End
 	})
@@ -157,7 +159,7 @@ $(document).ready(function(){
 		}else {
 			$.ajax({
 				type : "POST",
-				url : "nickCheck",
+				url : "/Final_Project/nickCheck",
 				dataType : "text",
 				data : {
 					nickName : $("#nickName").val()
@@ -193,7 +195,7 @@ $(document).ready(function(){
         }else{
 			$.ajax({
 				type : "POST",
-				url : "idCheck",
+				url : "/Final_Project/idCheck",
 				dataType : "text",
 				data : {
 					userid : $("#userid").val()
@@ -229,12 +231,13 @@ $(document).ready(function(){
 	
 	
 	$("form").on("submit", function(event){
-		if(!(email_check && id_check && pw_check && phone_check && nickName_check)){
+		if(!(email_check && id_check && pw_check && phone_check && nickName_check && captcha_check)){
 			console.log("email_check"+email_check);
 			console.log("id_check"+id_check);
 			console.log("pw_check"+pw_check);
 			console.log("phone_check"+phone_check);
 			console.log("nickName_check"+nickName_check);
+			console.log("captcha_check" + captcha_check);
 			event.preventDefault();
 			
 			if (!id_check){
@@ -250,8 +253,11 @@ $(document).ready(function(){
 				alert("휴대폰 번호를 확인해 해주세요.");
 				$("#phoneNumber").focus();
 			}else if(!email_check){
-				$("[name='userEMail']").focus();
+				$("[name='email']").focus();
 				alert("E Mail인증을 해주세요.");
+			} else if(!captcha_check){
+				$("[name='input_captcha']").focus();
+				alert("자동가입 방지 인증을 해주세요.");
 			} 
 		} else {
 			if($("[name='userName']").val().length == 0){
@@ -265,6 +271,45 @@ $(document).ready(function(){
 				event.preventDefault();
 			}
 		}
-		
 	})
+	
+	$("#captcha").on("click", function(event){
+		$.ajax({
+			type : "POST",
+			url : "/Final_Project/captchaCheck",
+			dataType : "json",
+			data : {
+				key : $("#key").val(),
+				value : $("#input_captcha").val()
+			},
+			success : function(Data, status, xhr) {
+				captcha_check = Data.result;
+				console.log(Data);
+				if(Data.result == true){
+					$("#captchacheck").html("<img id='smile' src='/Final_Project/image/item/smile.png'>");
+				} else{
+					$("#input_captcha").val("");
+					alert("자동가입방지 문자가 틀렸습니다.");
+					getCaptcha();
+				}
+			},
+			error : function(xhr, status, error) {
+				console.log("error");
+			}
+		})
+	})
+	function getCaptcha(){
+		$.ajax({
+			type : "POST",
+			url : "/Final_Project/getCaptcha",
+			dataType : "json",
+			success : function(Data, status, xhr) {
+				$("#captchaImg").attr("src", "/image/"+Data.img);
+				$("#key").val(Data.key);
+			},
+			error : function(xhr, status, error) {
+				console.log("error");
+			}
+		})
+	}
 })

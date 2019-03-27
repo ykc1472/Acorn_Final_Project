@@ -38,9 +38,7 @@ public class MemberService {
 	@Transactional
 	public int userAdd (MemberDTO dto) {
 		int success = 0;
-		MemberDAO dao = new MemberDAO();
 		success = dao.userAdd(dto);
-			
 	
 		return success;
 	}
@@ -48,7 +46,7 @@ public class MemberService {
 	public MemberDTO loginAction (MemberDTO dto) {
 		MemberDTO loginInfo = null;
 		loginInfo = dao.loginAction(dto);
-	
+		System.out.println(loginInfo);
 		return loginInfo;
 	}
 	

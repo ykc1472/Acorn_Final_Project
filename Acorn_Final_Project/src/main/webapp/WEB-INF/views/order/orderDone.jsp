@@ -92,7 +92,7 @@
 						<span class="a_default">${order.ordernum}</span>
 					</td>
 					<td height="35" width="50" class="td_default" align="center">
-						<img src="content/image/food/${order.fmainimage}.jpg" border="0" height="60">
+						<img src="/Final_Project/image/food/${order.fmainimage}.jpg" border="0" height="60">
 					</td>
 					<td height="35" class="td_default">
 						<span class="a_default">${order.ftitle}</span><br>

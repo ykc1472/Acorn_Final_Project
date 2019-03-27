@@ -71,7 +71,7 @@
 			<th class="td_default" width="80">${i.count}
 			<input type="hidden" value="${goods.fcode}" id="code_${i.count}">
 			</th>
-			<td class="td_default" width="80"><img src="content/image/food/${goods.fmainimage}.jpg" border="0" align="center" width="80" /></td>
+			<td class="td_default" width="80"><img src="/Final_Project/image/food/${goods.fmainimage}.jpg" border="0" align="center" width="80" /></td>
 			<td class="td_default" width="300" style='padding-left: 30px'>
 			<b>[${goods.categoryname}]</b>${goods.ftitle}<br>
 			${goods.content}<br>
@@ -119,7 +119,7 @@
 		<td align="center" colspan="5"><a class="a_black"
 			href="#" id="orderAllConfirm"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<a class="a_black" href="#" id="delAllCart"> 전체 삭제하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a class="a_black" href="index.jsp"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="/Final_Project/main"> 계속 쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</td>
 	</tr>
 	<tr>

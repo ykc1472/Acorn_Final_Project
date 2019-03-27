@@ -2,7 +2,6 @@ package com.dao;
 
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,47 +13,37 @@ public class MemberDAO {
 	SqlSessionTemplate template;
 	
 	public int phoneNumberCheck(String phoneNumber) {
-		int success = template.selectOne("MemberMapper.phoneNumberCheck", phoneNumber);
 		
-		return success;
+		return template.selectOne("MemberMapper.phoneNumberCheck", phoneNumber);
 	}
 	
 	public int nickNameCheck(String nickName) {
-		int success = template.selectOne("MemberMapper.nickNameCheck", nickName);
 		
-		return success;
+		return template.selectOne("MemberMapper.nickNameCheck", nickName);
 	}
 	
 	public int userIDCheck(String userid) {
-		int success = template.selectOne("MemberMapper.userIDCheck", userid);
 		
-		return success;
+		return template.selectOne("MemberMapper.userIDCheck", userid);
 	}
 	
 	public int userAdd(MemberDTO dto) {
-		int success = template.insert("MemberMapper.userAdd", dto);
-		
-		return success;
+		return template.insert("MemberMapper.userAdd", dto);
 	}
 	
 	public MemberDTO loginAction(MemberDTO dto) {
-		MemberDTO loginInfo = template.selectOne("MemberMapper.loginAction", dto);
-	
-		return loginInfo;
+		return template.selectOne("MemberMapper.loginAction", dto);
 	}
 
 	public HashMap<String, String> idSearch(MemberDTO dto) {
-		HashMap map = template.selectOne("MemberMapper.idSearch",dto);
-		return map;
+		return template.selectOne("MemberMapper.idSearch",dto);
 	}
 	
 	public String passwdSearch2(MemberDTO dto) {
-		String success = template.selectOne("MemberMapper.passwdSearch2",dto);
-		return success;
+		return template.selectOne("MemberMapper.passwdSearch2",dto);
 	}
 	
 	public String passwdSearch(MemberDTO dto) {
-		String success = template.selectOne("MemberMapper.passwdSearch",dto);
-		return success;
+		return template.selectOne("MemberMapper.passwdSearch",dto);
 	}
 }
