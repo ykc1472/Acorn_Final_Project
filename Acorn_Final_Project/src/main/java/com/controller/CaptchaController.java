@@ -26,7 +26,7 @@ public class CaptchaController {
 	
 	@RequestMapping(value="/captchaCheck", method=RequestMethod.POST)
 	public @ResponseBody String APICaptchaNkeyResult(@RequestParam("key") String key, @RequestParam("value") String value) {
-        System.out.println("1515");
+        
 		String clientId = "v9iNMJ29o1IXrn316w_6";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "azAMB01CHe";//애플리케이션 클라이언트 시크릿값";
         String result = "";

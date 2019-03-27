@@ -5,7 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="css/loginForm.css">
 
-
 <script type="text/javascript">
 	<c:if test="${!empty mesg}">
 		alert("${mesg}");

@@ -34,7 +34,7 @@ public class MailController {
 			}
 		};
 		mailSender.send(preparator);
-		m.addAttribute("mesg", mailInfo.getRandomMessage());
+		m.addAttribute("randomMesg", mailInfo.getRandomMessage());
 		return mailInfo.getNextPage();
 	}
 }

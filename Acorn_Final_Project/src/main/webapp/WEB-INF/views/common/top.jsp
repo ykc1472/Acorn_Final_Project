@@ -15,6 +15,13 @@
 
 <script type="text/javascript" src="/Final_Project/js/top.js"></script>
 
+<script type="text/javascript">
+	<c:if test="${!empty mesg}">
+		alert("${mesg}");
+		<c:remove var="mesg" />
+	</c:if>
+</script>
+
 
 <div>
 	<div class = "font">

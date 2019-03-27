@@ -5,7 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="css/loginForm.css">
 
-	
+<script type="text/javascript">
+	<c:if test="${!empty mesg}">
+		alert("${mesg}");
+		<c:remove var="mesg" />
+	</c:if>
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("form").on("submit", function(event){

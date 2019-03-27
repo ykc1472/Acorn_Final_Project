@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<script>
+<script type="text/javascript">
+	<c:if test="${!empty mesg}">
+		alert("${mesg}");
+		<c:remove var="mesg" />
+	</c:if>
+	
 	$(document).ready(function(){
 	$("#domain").on("change", function(event){
 		// 이메일 입력 기능 Start
