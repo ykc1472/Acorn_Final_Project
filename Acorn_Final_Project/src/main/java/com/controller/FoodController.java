@@ -111,7 +111,7 @@ public class FoodController {
 			paging.setPage(page);
 		}
 		System.out.println(paging);
-		paging = service.foodList(paging);
+		paging = service.foodNewList(paging);
 		request.setAttribute("flist", paging);
 		
 		return "foodListForm";
