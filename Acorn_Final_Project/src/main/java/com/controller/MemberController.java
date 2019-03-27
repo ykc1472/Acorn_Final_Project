@@ -1,7 +1,9 @@
 package com.controller;
 
+import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,6 @@ public class MemberController {
 		}
 		return "mesg/message";
 	}
-	
 	
 //	@RequestMapping("/emailCheck")
 //	public String emailCheck(@RequestParam("useremail") String useremail, Model m) {
@@ -136,5 +137,101 @@ public class MemberController {
 		session.removeAttribute("loginInfo");
 		
 		return "redirect:main";
+	}
+	
+	//////////////////////////////////////////////////////////////
+	
+//	@RequestMapping("/login")
+//	public String login(@RequestParam Map<String, String>map,
+//			HttpSession session) {
+//		
+//		MemberDTO dto = service.login(map);
+//		String nextPage=null;
+//		if(dto!=null) {
+//			session.setAttribute("login", dto);
+//			nextPage = "redirect:/main";// 8090/shop/main
+//		}else {
+//			nextPage = "redirect:/loginUI"; //8090/shop/loginUI
+//		}
+//		return nextPage;
+//	}
+	
+	@RequestMapping(value="MemberPasswdSearch", method=RequestMethod.GET)
+	public String MemberPasswdSearch(@RequestParam("username") String username,
+									@RequestParam("userid")String userid,
+									@RequestParam("userEMail")String email,
+									HttpServletRequest request,
+									@ModelAttribute("mailInfo") MailDTO mailInfo, Model m) {
+		
+		username = username.trim();
+		userid = userid.trim();
+		email = email.trim();
+		
+		String mesg = "<h1>Dessert_Mini_Project</h1><h3>이메일 인증입니다</h3>";
+		
+		Random rnd = new Random();
+		StringBuffer buf = new StringBuffer();
+		
+		for(int i=0;i<10;i++){
+		    //rnd.nextBoolean() 는 랜덤으로 true, false 를 리턴.
+			//true일 시 랜덤 한 소문자를, false 일 시 랜덤 한 숫자를 StringBuffer 에 append 한다.
+		    if(rnd.nextBoolean()){
+		        buf.append((char)((int)(rnd.nextInt(26))+97));
+		    }else{
+		        buf.append((rnd.nextInt(10)));
+		    }
+		}
+
+		MemberDTO dto = new MemberDTO();
+		dto.setUsername(username);
+		dto.setUserid(userid);
+		dto.setEmail(email);
+		
+		String userpw = service.passwdSearch(dto);
+		String nextPage = null;
+		if (userpw == null) {
+			nextPage = "passwdSearch";
+			request.setAttribute("mesg", "등록되지 않은 정보입니다.");
+		} else {
+			nextPage="forward:sendMail";
+			HttpSession session = request.getSession();
+			
+			mesg += "<h3>비밀번호 찾기에 필요한 인증번호 :</h3><h2>" + buf + "</h2><h3>입니다.</h3>";
+			mailInfo.setFormNickName("admin");
+			mailInfo.setRandomMessage(buf.toString());
+			mailInfo.setMesg(mesg);
+			mailInfo.setMailtitle("Dessert_Mini_Project 본인인증 메일입니다.");
+			mailInfo.setNextPage("passwdCheck");
+			mailInfo.setUseremail(email);
+			session.setAttribute("buf", buf.toString());
+			session.setAttribute("userid", userid);
+		}
+		return nextPage;
+	}
+	
+	
+	@RequestMapping("/PasswdCheck")
+	public String PasswdCheck(HttpSession session, HttpServletRequest request) {
+		session = request.getSession();
+		String buf = (String)session.getAttribute("buf").toString();
+		String userid = (String)session.getAttribute("userid").toString();
+		String pwcheck = request.getParameter("pwcheck").trim();
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setUserid(userid);
+		
+		String userpw = service.passwdSearch2(dto);
+		
+		session.setAttribute("userpw", userpw);
+		
+		String nextPage = null;
+		if (!(pwcheck.equals(buf))) {
+			nextPage = "passwdCheck";
+			request.setAttribute("mesg", "인증번호가 일치하지 않습니다. 다시 입력해주세요. ");
+		} else {
+			nextPage="passwdCheck2";
+			session.removeAttribute("buf");
+		}
+		return nextPage;
 	}
 }

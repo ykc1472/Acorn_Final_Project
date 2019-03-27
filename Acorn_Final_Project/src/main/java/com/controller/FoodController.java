@@ -21,11 +21,6 @@ public class FoodController {
 	@Autowired
 	FoodService service;
 	
-	@RequestMapping("/")
-	public String main() {
-		
-		return "main";
-	}
 	@RequestMapping("/FoodList")
 	public ModelAndView foodList(@ModelAttribute("flist") PagingFoodListDTO paging) {
 		ModelAndView mav = new ModelAndView();

@@ -21,7 +21,7 @@
 })
 </script>        
   
-<form action="MemberPasswdSearchServlet" method="get">
+<form action="MemberPasswdSearch" method="get">
 <div align="center">    
 <table>
 <tr>

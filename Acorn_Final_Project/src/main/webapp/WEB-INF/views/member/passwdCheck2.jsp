@@ -14,7 +14,7 @@
 </script>
 
 <div align="center" class="content">
-	<form action="PasswdCheckServlet" method="get">
+	<form action="PasswdCheck" method="get">
 		<table>
 			<tr>
 				<td colspan="2"><hr></td>
@@ -35,7 +35,7 @@
 				<td colspan="2"><hr></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><a href="loginForm.jsp" class="login">로그인 화면으로 이동</a></td>
+				<td colspan="2" align="center"><a href="loginForm" class="login">로그인 화면으로 이동</a></td>
 			</tr>
 			<tr>
 				<td colspan="2"><hr></td>
