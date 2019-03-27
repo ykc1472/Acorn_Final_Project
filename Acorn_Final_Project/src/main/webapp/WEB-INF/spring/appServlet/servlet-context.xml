@@ -19,7 +19,7 @@
 	<!-- Filter End-->
 	<context:component-scan base-package="com.**.*" />
 
-
+ 	<context:
 
 	<!-- 정적 파일(폴더) 등록 -->
 	<!-- <img src="image/쉬.gif>"를 쓰면, image를 만나면 Mapping 에 의해서 /WEB-INF에서 찾는다. 
