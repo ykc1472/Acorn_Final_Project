@@ -19,13 +19,6 @@
 	<!-- Filter End-->
 	<context:component-scan base-package="com.**.*" />
 
- 	<context:
-
-	<!-- 정적 파일(폴더) 등록 -->
-	<!-- <img src="image/쉬.gif>"를 쓰면, image를 만나면 Mapping 에 의해서 /WEB-INF에서 찾는다. 
-		여기서 /WEB-INF/image/ 에서 image뒤에 꼭 / 을 붙여 주어야 하며, 상위 디렉토리로 여러개 들어갈 수도 있기 때문에, 
-		mapping에서 /image/뒤에 **이 중요하다. -->
-
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	<mvc:resources location="/WEB-INF/image/" mapping="/image/**" />
@@ -46,6 +39,8 @@
 			</props>
 		</property>
 	</bean>
+	<!-- Mail 기본설정 End -->
+	
 	
 	<!-- 컨트롤러를 들리지 않고 직접 이동하는 녀석들... -->
 	<mvc:view-controller path="/memberForm" view-name="memberForm" />
@@ -62,10 +57,11 @@
     		<mvc:mapping path="/loginCheck/**"/>
     		<bean class="com.interceptor.LoginCheckIntercepter" />
     	</mvc:interceptor>
-    	<mvc:interceptor>
-    		<mvc:mapping path="/captcha/**"/>
-    		<bean class="com.interceptor.CaptchaIntercepter" />
-    	</mvc:interceptor>
     </mvc:interceptors>
+    
+    
+    <!-- flash Scope를 사용하기 위해 등록 -->
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler/>
 
 </beans>

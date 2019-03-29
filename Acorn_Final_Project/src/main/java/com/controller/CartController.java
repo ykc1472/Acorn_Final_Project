@@ -43,9 +43,7 @@ public class CartController {
 			request.setAttribute("success", cartList.size());
 			nextPage = "cartAddForm";
 		} else {
-			nextPage = request.getHeader("referer");
-			System.out.println(nextPage);
-			nextPage = nextPage.substring(nextPage.indexOf(request.getContextPath())+request.getContextPath().length()+1, nextPage.length());
+			nextPage = "redirect:" + request.getHeader("referer");
 			System.out.println(nextPage);
 			mesg = list.size()+"개의  등록된 같은 제품이 있습니다.";
 			session.setAttribute("mesg", mesg);

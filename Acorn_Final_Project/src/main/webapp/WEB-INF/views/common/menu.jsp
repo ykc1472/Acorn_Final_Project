@@ -11,7 +11,7 @@
 			<td width="120" align='center'><a href="/Final_Project/FoodList?category=5" class="menu">식빵·케이크</a></td>
 			<td width="120" align='center'><a href="/Final_Project/FoodList?category=6" class="menu">잼·스프레드</a></td>
 			<td width="120" align='center'><a href="#" class="menu">후기게시판</a></td>
-			<td width="120" align='center'><a href="/Final_Project/QnABoardListForm" class="menu">QnA게시판</a></td>
+			<td width="120" align='center'><a href="/Final_Project/qnaBoardListForm" class="menu">QnA게시판</a></td>
 		</tr>
 	</table>
 </div>
