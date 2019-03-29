@@ -5,13 +5,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
-
 </style>
 
 <script type="text/javascript">
 	function move(url){
 		location.href=url;
 	}
+	$(document).ready(function(){
+		$(".board").on("mouseover", function(event){
+			$(this).css("background", "rgba( 128, 128, 128, 0.3 )");
+			
+		})
+		$(".board").on("mouseout", function(event){
+			$(this).css("background", "");
+		})
+	})
 </script>
 </head>
 
@@ -36,15 +44,15 @@
 		</thead>
 		<tbody>
 		<c:forEach var="list" items="${paging.qnaboardlist}">
-			<tr>
+			<tr onclick="location.href='qnaBoardForm?pick=${list.qna_num}'" class="board">
 				<td align="center">${list.qna_num}</td>
-				<td><a href="QnABoardForm?pick=${list.qna_num}">${list.qna_title}</a></td>
+				<td>${list.qna_title}</td>
 				<td align="center">${list.nickname}</td>
 				<td align="center">${list.writedate}</td>
 			</tr>
 			<c:forEach var="commentlist" items="${paging.qnacommentlist}">
 				<c:if test="${commentlist.qna_num == list.qna_num}">
-					<tr>
+					<tr class="board" onclick="location.href='qnaBoardForm?pick=${list.qna_num}'">
 						<td align="center">&nbsp;ㄴ</td>
 						<td><a href="qna_CommentBoardForm?pick=${commentlist.qna_num}">${commentlist.qnac_title}</a></td>
 						<td align="center">${commentlist.nickname}</td>

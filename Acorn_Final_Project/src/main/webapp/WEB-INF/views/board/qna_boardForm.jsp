@@ -12,7 +12,7 @@
 			</tr>
 			<tr>
 				<th>닉네임</th>
-				<td colspan="3"><span >${QnABoard.nickname}</span></td>
+				<td width="350px"><span >${QnABoard.nickname}</span></td>
 				<c:choose>
 					<c:when test="${QnABoard.writedate eq QnABoard.rewritedate}">
 						<th>작성일</th>
@@ -30,7 +30,7 @@
 				<td colspan="3"><textarea name=content rows ="15" cols="100" readonly="readonly">${QnABoard.content}</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right">
+				<td colspan="4" align="right">
 					<c:if test="${loginInfo.usernickname == QnABoard.nickname}">
 						<a href="#">수정</a>&nbsp;
 						<a href="#">삭제</a>
