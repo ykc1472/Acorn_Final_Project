@@ -91,6 +91,7 @@ public class PagingFoodListDTO {
 
 	public void setLimit(int limit) {
 		this.limit = limit;
+		this.offset = (page - 1) * limit;
 	}
 
 	public int getCategory() {

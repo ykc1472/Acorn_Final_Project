@@ -36,6 +36,7 @@
                 <value>/WEB-INF/config/CartMapper.xml</value>
                 <value>/WEB-INF/config/OrderMapper.xml</value>
                 <value>/WEB-INF/config/BoardMapper.xml</value>
+                <value>/WEB-INF/config/AdminManagement.xml</value>
             </list>
         </property>
         <property name="typeAliases">

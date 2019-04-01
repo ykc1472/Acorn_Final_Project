@@ -50,12 +50,17 @@
 	<mvc:view-controller path="/member/mailCheck" view-name="member/mailCheck" />
 	<mvc:view-controller path="/passwdSearch" view-name="passwdSearch"/>
 	<mvc:view-controller path="/orderConfirmUI" view-name="orderConfirm" />
+	<mvc:view-controller path="/foodManagement" view-name="foodManagement" />
 	
 	<!-- interceptor 처리 (Login Check) -->
 	<mvc:interceptors>
     	<mvc:interceptor>
     		<mvc:mapping path="/loginCheck/**"/>
     		<bean class="com.interceptor.LoginCheckIntercepter" />
+    	</mvc:interceptor>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/adminCheck/**"/>
+    		<bean class="com.interceptor.AdminCheckIntercepter" />
     	</mvc:interceptor>
     </mvc:interceptors>
     
