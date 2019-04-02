@@ -27,18 +27,18 @@
 	<div class = "font">
 		<c:choose>
 			<c:when test="${loginInfo != null }">
-				<a href="loginCheck/logout" class="menuTop">로그아웃</a>&nbsp;&nbsp;
-				<a href="loginCheck/cartList" class="menuTop">장바구니</a>&nbsp;&nbsp;
+				<a href="/Final_Project/loginCheck/logout" class="menuTop">로그아웃</a>&nbsp;&nbsp;
+				<a href="/Final_Project/loginCheck/cartList" class="menuTop">장바구니</a>&nbsp;&nbsp;
 				<a href="" class="menuTop">나의정보</a>&nbsp;
 				<c:if test= "${loginInfo.grade == 99}">
-					<br><a href="adminCheck/foodInfoManagement" class="menuTop">상품정보 관리</a>&nbsp;&nbsp;
-					<a href="adminCheck/MemberManagement" class="menuTop">사용자 정보 관리</a>
+					<br><a href="/Final_Project/adminCheck/foodInfoManagement" class="menuTop">상품정보 관리</a>&nbsp;&nbsp;
+					<a href="/Final_Project/adminCheck/MemberManagement" class="menuTop">사용자 정보 관리</a>
 				</c:if>
 			</c:when>
 		
 			<c:otherwise>
-				<a href="loginForm" class="menuTop">로그인</a>&nbsp;&nbsp;
-				<a href="memberForm" class="menuTop">회원가입</a>&nbsp;
+				<a href="/Final_Project/loginForm" class="menuTop">로그인</a>&nbsp;&nbsp;
+				<a href="/Final_Project/memberForm" class="menuTop">회원가입</a>&nbsp;
 			</c:otherwise>
 		</c:choose>
 		<div align="center"><a href="main"><img src="/Final_Project/image/item/mainBanner.jpg" width = "200"></a>

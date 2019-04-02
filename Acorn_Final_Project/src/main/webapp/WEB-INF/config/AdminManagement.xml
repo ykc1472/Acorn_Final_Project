@@ -5,10 +5,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="AdminManagement">
 
 	<select id="foodInfoList" resultType="FoodInfoDTO">
-		select fcode, ftitle, fprice, fimage, fcategory, content, fmainimage, foption, optionname, optionprice, stock
-		from food
-		natural join foodoption
+		select fcode, categoryname, ftitle, fprice, fimage, fcategory, content, fmainimage, foption, optionname, optionprice, stock
+		from food 
+    	natural join foodoption
+		natural join category
 		order by fcode asc, foption asc
 	</select>
+
+	<select id="categorySelect" resultType="hashmap">
+		select fcategory, categoryname from category
+    	order by fcategory asc
+	</select>
+	
+	<select id="foodTotalCount" resultType="int">
+		select count(*) from food
+	</select>
+	
+	<update id="updateFoodInfoMain">
+		update food
+   		set ftitle = #{ftitle},
+   		fprice = #{fprice},
+   		fcategory = #{fcategory},
+   		content = #{content}
+    	where fcode = #{fcode}
+	</update>
+	<update id="updateFoodInfoOption">
+		update foodoption
+   		set optionname = #{optionname},
+   		optionprice = #{optionprice},
+   		stock = #{stock}
+    	where fcode = #{fcode}
+    	and foption = #{foption}
+	</update>
 	
 </mapper>

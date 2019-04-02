@@ -53,7 +53,7 @@ public class FoodInfoDTO {
 		return categoryname;
 	}
 
-	public void setFcategoryname(String categoryname) {
+	public void setCategoryname(String categoryname) {
 		this.categoryname = categoryname;
 	}
 
@@ -156,7 +156,7 @@ public class FoodInfoDTO {
 	@Override
 	public String toString() {
 		return "FoodInfoDTO [sales=" + sales + ", fcode=" + fcode + ", ftitle=" + ftitle + ", fprice=" + fprice
-				+ ", fimage=" + fimage + ", fcategory=" + fcategory + ", fcategoryname=" + categoryname + ", content="
+				+ ", fimage=" + fimage + ", fcategory=" + fcategory + ", categoryname=" + categoryname + ", content="
 				+ content + ", fmainimage=" + fmainimage + ", foption=" + foption + ", optionprice=" + optionprice
 				+ ", stock=" + stock + ", optionname=" + optionname + "]";
 	}

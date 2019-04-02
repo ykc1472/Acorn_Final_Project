@@ -19,7 +19,7 @@ public class OrderDAO {
 		for(int i = 0 ; i < orderList.size() ; i++) {
 			OrderDTO dto = template.selectOne("OrderMapper.orderConfirm", orderList.get(i));
 			
-			orderList.get(i).setFcategoryname(dto.getCategoryname());
+			orderList.get(i).setCategoryname(dto.getCategoryname());
 			orderList.get(i).setFcode(dto.getFcode());
 			orderList.get(i).setFtitle(dto.getFtitle());
 			orderList.get(i).setContent(dto.getContent());
