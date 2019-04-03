@@ -38,4 +38,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	and foption = #{foption}
 	</update>
 	
+	<delete id="deleteFoodOption" parameterType="FoodInfoDTO">
+		delete foodoption
+		where fcode = #{fcode}
+		and foption = #{foption}
+	</delete>
+	
 </mapper>

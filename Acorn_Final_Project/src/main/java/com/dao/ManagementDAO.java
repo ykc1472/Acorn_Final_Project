@@ -36,4 +36,10 @@ public class ManagementDAO {
 		return main;
 		
 	}
+
+	public int deleteFoodOption(FoodInfoDTO dto){
+		
+		return template.update("AdminManagement.deleteFoodOption", dto);
+		
+	}
 }

@@ -30,7 +30,17 @@
 					console.log("error");
 				}
 			}) 
-		})
+		}) // end updateInfo
+		
+		$(".deleteInfo").on("click", function(event){
+			var fcode = $(this).attr("data-fcode");
+			var foption = $(this).attr("data-foption");
+			var ftitle = $("#ftitle_"+fcode).val(); 
+			var optionname = $("#optionname_"+fcode+"_"+foption).val();
+		    if (confirm("제품 : " + ftitle + "의 \n" + optionname + "을 삭제하시겠습니까?") == true) {
+				location.replace('/Final_Project/adminCheck/deleteFoodOption?fcode='+fcode+'&foption='+foption);
+		    }
+		});
 	})
 </script>
 

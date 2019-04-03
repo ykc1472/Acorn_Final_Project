@@ -35,4 +35,8 @@ public class ManagementService {
 		}
 		return success;
 	}
+	@Transactional
+	public int deleteFoodOption(FoodInfoDTO dto) {
+		return dao.deleteFoodOption(dto);
+	}
 }

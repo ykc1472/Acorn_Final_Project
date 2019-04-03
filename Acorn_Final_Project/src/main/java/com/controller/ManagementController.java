@@ -27,8 +27,17 @@ public class ManagementController {
 	}
 	
 	@RequestMapping("/adminCheck/updateFoodInfo")
-	public @ResponseBody int updateFoodInfo(@ModelAttribute("aaa") FoodInfoDTO dto, Model m) {
+	public @ResponseBody int updateFoodInfo(@ModelAttribute("dto") FoodInfoDTO dto, Model m) {
 		
 		return service.updateFoodInfo(dto);
 	}
+	
+	@RequestMapping("/adminCheck/deleteFoodOption")
+	public String deleteFoodOption(@ModelAttribute("dto") FoodInfoDTO dto) {
+		System.out.println(dto);
+		service.deleteFoodOption(dto);
+		return "redirect:/adminCheck/foodInfoManagement";
+	}
+	
+	
 }
