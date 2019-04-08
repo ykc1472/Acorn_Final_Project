@@ -2,12 +2,15 @@ package com.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.PagingOrderListDTO;
+
 @Repository
 public class OrderDAO {
 	@Autowired
@@ -58,6 +61,15 @@ public class OrderDAO {
 			success += template.update("OrderMapper.updateOptionStock", order);
 		}
 		return success;
+	}
+	
+	public PagingOrderListDTO orderListAll(MemberDTO memberDTO, PagingOrderListDTO pagingOrderList){
+		System.out.println("memberDTO >> " + memberDTO);
+		
+		pagingOrderList.setOrderlist(template.selectList("OrderMapper.OrderListAll", memberDTO, new RowBounds(pagingOrderList.getOffset(), pagingOrderList.getLimit())));
+		pagingOrderList.setTotal(template.selectOne("OrderMapper.OrderListTotal", memberDTO)); // 페이징 처리를 위한 전체 갯수 확인
+		
+		return pagingOrderList;
 	}
 	
 	

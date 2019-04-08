@@ -3,18 +3,18 @@ package com.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.PagingOrderListDTO;
 import com.service.OrderService;
 
 @Controller
@@ -25,7 +25,7 @@ public class OrderController {
 	@RequestMapping("/loginCheck/orderDone")
 	public String orderDone(@RequestParam(value="amount", required=false) int[] amount, @RequestParam(value="fcode", required=false) String[] fcode, @RequestParam(value="foption", required=false) int[] foption, 
 			@RequestParam(value="post", required=false) int post, @RequestParam(value="addr1", required=false) String address_f, @RequestParam(value="addr2", required=false) String address_l,
-			@RequestParam(value="payment", required=false) int payment, @RequestParam(value="payMethod", required=false) int payMethod, HttpServletRequest request, HttpSession session) {
+			@RequestParam(value="payment", required=false) int payment, @RequestParam(value="payMethod", required=false) int payMethod, @RequestParam(value="orderName", required=false) String orderName, HttpServletRequest request, HttpSession session) {
 		
 		String nextPage = null;
 		String mesg = null;
@@ -39,7 +39,7 @@ public class OrderController {
 			
 			String userid = ((MemberDTO)session.getAttribute("loginInfo")).getUserid();
 			for(int i = 0 ; i < fcode.length ; i++) {
-				orderList.add(new OrderDTO(fcode[i], foption[i], userid, amount[i], post, address_f, address_l, payMethod, payment));
+				orderList.add(new OrderDTO(fcode[i], foption[i], userid, amount[i], post, address_f, address_l, payMethod, payment, orderName));
 			}
 			
 			orderList = service.orderDone(orderList);
@@ -78,4 +78,56 @@ public class OrderController {
 	
 		return nextPage;
 	}
+	
+	@RequestMapping("/adminCheck/orderList")
+	public String adminOrderListAll (@RequestParam(value="page", required=false, defaultValue = "1" ) int page, HttpSession session, Model m){
+		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
+		String nextPage = "";
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
+
+		pagingOrderList.setPage(page);
+		pagingOrderList = service.orderListAll(memberDTO, pagingOrderList);
+
+		System.out.println(pagingOrderList);
+		for(OrderDTO dto : pagingOrderList.getOrderlist()) {
+			System.out.println(dto.getFtitle());
+		}
+		m.addAttribute("pagingDTO" , pagingOrderList);
+		
+		nextPage = "adminOrderListAll";
+		
+		return nextPage;
+	}
+
+	@RequestMapping("/loginCheck/orderList")
+	public String memberOrderListAll (@RequestParam(value="page", required=false, defaultValue = "1" ) int page, HttpSession session, Model m){
+		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
+		String nextPage = "";
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
+		
+		pagingOrderList.setPage(page);
+		pagingOrderList = service.orderListAll(memberDTO, pagingOrderList);
+
+		System.out.println(pagingOrderList);
+		for(OrderDTO dto : pagingOrderList.getOrderlist()) {
+			System.out.println(dto.getFtitle());
+		}
+		m.addAttribute("pagingDTO" , pagingOrderList);
+		
+		nextPage = "memberOrderListAll";
+	
+		return nextPage;
+	}
+	@RequestMapping("/loginCheck/deliveryInfo")
+	public String deliveryInfo (@RequestParam(value="ordernum", required=false ) int ordernum, HttpSession session){
+		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
+		String nextPage = "";
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
+		
+		
+		nextPage = "deliveryInfo";
+		
+		return nextPage;
+	}
+	
 }

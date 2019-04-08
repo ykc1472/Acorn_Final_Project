@@ -13,7 +13,7 @@
 <!-- 인터넷에 있는 한글 Noto Sans 글씨체를 사용하기 위한 Link-->
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&amp;subset=korean" rel="stylesheet" />
 
-<script type="text/javascript" src="/Final_Project/js/top.js"></script>
+<script type="text/javascript" src="/Final_Project/js/top.js" ></script>
 
 <script type="text/javascript">
 	<c:if test="${!empty mesg}">
@@ -28,12 +28,18 @@
 		<c:choose>
 			<c:when test="${loginInfo != null }">
 				<a href="/Final_Project/loginCheck/logout" class="menuTop">로그아웃</a>&nbsp;&nbsp;
-				<a href="/Final_Project/loginCheck/cartList" class="menuTop">장바구니</a>&nbsp;&nbsp;
-				<a href="" class="menuTop">나의정보</a>&nbsp;
-				<c:if test= "${loginInfo.grade == 99}">
-					<br><a href="/Final_Project/adminCheck/foodInfoManagement" class="menuTop">상품정보 관리</a>&nbsp;&nbsp;
-					<a href="/Final_Project/adminCheck/MemberManagement" class="menuTop">사용자 정보 관리</a>
-				</c:if>
+				<c:choose>
+					<c:when test="${loginInfo.grade == 99}">
+						<a href="/Final_Project/adminCheck/foodInfoManagement" class="menuTop">상품정보 관리</a>&nbsp;&nbsp;
+						<a href="/Final_Project/adminCheck/MemberManagement" class="menuTop">사용자 정보 관리</a>&nbsp;&nbsp;
+						<a href="/Final_Project/adminCheck/orderList" class="menuTop">전체 주문확인</a>&nbsp;&nbsp;
+					</c:when>
+					<c:otherwise>
+						<a href="/Final_Project/loginCheck/cartList" class="menuTop">장바구니</a>&nbsp;&nbsp;
+						<a href="" class="menuTop">나의정보</a>&nbsp;&nbsp;
+						<a href="/Final_Project/loginCheck/orderList" class="menuTop">주문확인</a>&nbsp;&nbsp;
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 		
 			<c:otherwise>
@@ -45,7 +51,7 @@
 		
 		</div>
 		<div>
-			<form action="searchingFoodList" method="get">
+			<form action="/Final_Project/searchingFoodList" method="get">
 				<input type="text" name="search" id="search"> <input type="submit" value="검색">
 			</form>
 			 

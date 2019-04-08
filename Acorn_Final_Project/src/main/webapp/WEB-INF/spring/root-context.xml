@@ -46,6 +46,7 @@
         		<value>com.dto.FoodInfoDTO</value>
         		<value>com.dto.OrderDTO</value>
         		<value>com.dto.PagingQnABoardDTO</value>
+        		<value>com.dto.PagingOrderListDTO</value>
         		<value>com.dto.QnABoardCommentDTO</value>
         		<value>com.dto.QnABoardDTO</value>
         	</list>

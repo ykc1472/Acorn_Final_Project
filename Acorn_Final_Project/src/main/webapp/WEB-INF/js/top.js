@@ -3,7 +3,7 @@ $(document).ready(function(){
 		source : function( request, response ) {
 			$.ajax({
 				type : "post",
-				url : "searchingFood",
+				url : "/Final_Project/searchingFood",
 				dataType : "json",
 				data : {
 					search : $("#search").val().trim()

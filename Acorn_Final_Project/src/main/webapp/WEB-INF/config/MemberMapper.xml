@@ -38,9 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		select userid, rpad(substr(userid,0,2 ), length(userid), '*') as userid2
 		from member
-		where username=#{username} and
-		phone=#{phone} and
-		email=#{email}
+		where username=#{username} 
+		and phone=#{phone} 
+		and email=#{email}
 	</select>
 
 	<select id="orderUserInfo" parameterType="MemberDTO"
@@ -62,8 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="MemberDTO">
 		select userpw
 		from member
-		where username=#{username} and
-		userid=#{userid} and email=#{email}
+		where username=#{username} 
+		and userid=#{userid} 
+		and email=#{email}
 	</select>
 
 </mapper>

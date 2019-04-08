@@ -28,14 +28,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		select order_num.nextval from dual
   		</selectKey>
   		
-		insert into forder (ordernum, userid, fcode, orderamount, foption, paymethode, o_addr_post, o_addr_f, o_addr_l, payment)
+		insert into forder (ordernum, userid, fcode, orderamount, foption, paymethode, o_addr_post, o_addr_f, o_addr_l, payment, o_name)
 			values(#{ordernum}, #{userid}, #{fcode}, #{amount}, #{foption}, #{payMethod}, #{addr_post}, 
-			#{addr_f}, #{addr_l}, #{payment})
+			#{addr_f}, #{addr_l}, #{payment}, #{orderName})
 	</insert>
 	
 	<select id="selectOrderAllDone" resultType="OrderDTO" parameterType="arraylist">
-		select ordernum, userid, to_char(orderdate, 'yy/mm/dd')orderdate, 
-		categoryname fcategoryname, ftitle, content, foption, 
+		select ordernum, userid, to_char(orderdate, 'yy/mm/dd') orderdate, 
+		categoryname, ftitle, content, foption, 
 		optionname, fprice, optionprice, fmainimage, orderamount amount, paymethode, 
 		o_addr_post addr_post, o_addr_f addr_f,	o_addr_l addr_l 
 		from food
@@ -54,5 +54,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fcode = #{fcode}
 		and foption = #{foption}
 	</update>
+	
+	<select id="OrderListAll" parameterType="MemberDTO" resultType="OrderDTO">
+	
+		select ordernum, userid, to_char(orderdate, 'yy/mm/dd') orderdate, 
+			categoryname, ftitle, content, foption, state, 
+			optionname, fprice, optionprice, fmainimage, orderamount amount, paymethode, 
+			o_addr_post addr_post, o_addr_f addr_f,	o_addr_l addr_l, o_name ordername
+		from food
+		NATURAL join foodoption
+		NATURAL join forder
+		natural join category 
+		<if test="grade != 99">
+    		where userid = #{userid}
+  		</if>
+  		order by orderdate desc, state asc
+	</select>
+	
+	<select id="OrderListTotal"  parameterType="MemberDTO" resultType="int">
+		select count(*) from forder
+		<if test="grade != 99">
+    		where userid = #{userid}
+  		</if>
+	</select>
 	
 </mapper>

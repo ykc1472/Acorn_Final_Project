@@ -15,7 +15,8 @@ public class OrderDTO extends FoodInfoDTO {
 	private int payment;
 	private String addr_f;
 	private String addr_l;
-
+	private String orderName;
+	
 	public OrderDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -49,7 +50,7 @@ public class OrderDTO extends FoodInfoDTO {
 	}
 
 	public OrderDTO(int ordernum, String userid, String orderdate, int state, int amount, int addr_post, String addr_f,
-			String addr_l) {
+			String addr_l, String orderName) {
 		super();
 		this.ordernum = ordernum;
 		this.userid = userid;
@@ -59,12 +60,11 @@ public class OrderDTO extends FoodInfoDTO {
 		this.addr_post = addr_post;
 		this.addr_f = addr_f;
 		this.addr_l = addr_l;
+		this.orderName = orderName;
 	}
-	
-	
 
 	public OrderDTO(String fcode, int foption, String userid, int amount, int addr_post,
-			String addr_f, String addr_l, int payMethod, int payment) {
+			String addr_f, String addr_l, int payMethod, int payment, String orderName) {
 		super(fcode, foption);
 		this.userid = userid;
 		this.amount = amount;
@@ -73,6 +73,7 @@ public class OrderDTO extends FoodInfoDTO {
 		this.payment = payment;
 		this.addr_f = addr_f;
 		this.addr_l = addr_l;
+		this.orderName = orderName;
 	}
 
 	public int getOrdernum() {
@@ -155,16 +156,20 @@ public class OrderDTO extends FoodInfoDTO {
 	public void setPayment(int payment) {
 		this.payment = payment;
 	}
+	
+	
+	public String getOrderName() {
+		return orderName;
+	}
+
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
 
 	@Override
 	public String toString() {
 		return "OrderDTO [ordernum=" + ordernum + ", userid=" + userid + ", orderdate=" + orderdate + ", state=" + state
-				+ ", amount=" + amount + ", addr_post=" + addr_post + ", addr_f=" + addr_f + ", addr_l=" + addr_l
-				+ ", toString()=" + super.toString() + "]";
+				+ ", amount=" + amount + ", addr_post=" + addr_post + ", payMethod=" + payMethod + ", payment="
+				+ payment + ", addr_f=" + addr_f + ", addr_l=" + addr_l + ", orderName=" + orderName + "]";
 	}
-
-	
-
-	
-
 }

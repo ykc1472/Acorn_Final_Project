@@ -9,22 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.OrderDAO;
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
+import com.dto.PagingOrderListDTO;
+
 @Service
 public class OrderService {
 	@Autowired
 	OrderDAO dao;
-	
+
 	@Transactional
-	public List<OrderDTO> orderConfirm(List<OrderDTO> orderlist){
+	public List<OrderDTO> orderConfirm(List<OrderDTO> orderlist) {
 
 		return dao.orderConfirm(orderlist);
 	}
-	
+
 	@Transactional
-	public MemberDTO orderUserInfo(String userid){
-		
+	public MemberDTO orderUserInfo(String userid) {
+
 		return dao.orderUserInfo(userid);
 	}
+
 	@Transactional
 	public List<OrderDTO> orderDone(List<OrderDTO> orderList) {
 		int insert_success = 0;
@@ -34,12 +37,16 @@ public class OrderService {
 		System.out.println(2);
 		update_success = dao.updateOptionStock(orderList);
 		System.out.println(3);
-		if(insert_success == orderList.size() && insert_success == update_success) {
+		if (insert_success == orderList.size() && insert_success == update_success) {
 			System.out.println(4);
 			orderList = dao.selectOrderAllDone(orderList);
 			System.out.println(5);
 		}
-		
+
 		return orderList;
+	}
+
+	public PagingOrderListDTO orderListAll(MemberDTO memberDTO, PagingOrderListDTO pagingOrderList) {
+		return dao.orderListAll(memberDTO, pagingOrderList);
 	}
 }
