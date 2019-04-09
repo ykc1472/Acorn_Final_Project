@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,13 @@ public class OrderService {
 
 	public PagingOrderListDTO orderListAll(MemberDTO memberDTO, PagingOrderListDTO pagingOrderList) {
 		return dao.orderListAll(memberDTO, pagingOrderList);
+	}
+	
+	public int selectState(int ordernum) {
+		return dao.selectState(ordernum);
+	}
+
+	public int changeState(OrderDTO dto) {
+		return dao.changeState(dto);
 	}
 }

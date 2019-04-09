@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -64,12 +65,18 @@ public class OrderDAO {
 	}
 	
 	public PagingOrderListDTO orderListAll(MemberDTO memberDTO, PagingOrderListDTO pagingOrderList){
-		System.out.println("memberDTO >> " + memberDTO);
 		
 		pagingOrderList.setOrderlist(template.selectList("OrderMapper.OrderListAll", memberDTO, new RowBounds(pagingOrderList.getOffset(), pagingOrderList.getLimit())));
 		pagingOrderList.setTotal(template.selectOne("OrderMapper.OrderListTotal", memberDTO)); // 페이징 처리를 위한 전체 갯수 확인
 		
 		return pagingOrderList;
+	}
+
+	public int selectState(int ordernum){
+		return template.selectOne("OrderMapper.selectState", ordernum);
+	}
+	public int changeState(OrderDTO dto){
+		return template.update("OrderMapper.changeState", dto);
 	}
 	
 	

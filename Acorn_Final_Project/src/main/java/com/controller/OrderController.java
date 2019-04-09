@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dto.MemberDTO;
 import com.dto.OrderDTO;
@@ -118,8 +122,10 @@ public class OrderController {
 	
 		return nextPage;
 	}
+	
 	@RequestMapping("/loginCheck/deliveryInfo")
 	public String deliveryInfo (@RequestParam(value="ordernum", required=false ) int ordernum, HttpSession session){
+		// 구현중.....
 		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
 		String nextPage = "";
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
@@ -128,6 +134,23 @@ public class OrderController {
 		nextPage = "deliveryInfo";
 		
 		return nextPage;
+	}
+
+	@RequestMapping(value="/adminCheck/selectState", method=RequestMethod.GET)
+	public @ResponseBody int selectState (@RequestParam(value="ordernum", required=false ) int ordernum){
+		return service.selectState(ordernum);
+	}
+	
+	@RequestMapping(value="/adminCheck/changeState", method=RequestMethod.PUT)
+	public @ResponseBody int changeState (@RequestBody OrderDTO dto){
+		
+		return service.changeState(dto);
+	}
+
+	@RequestMapping(value="/adminCheck/deliveryInfo/", method=RequestMethod.GET)
+	public @ResponseBody int deliveryInfo (@RequestBody OrderDTO dto){
+		
+		return service.changeState(dto);
 	}
 	
 }

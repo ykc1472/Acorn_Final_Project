@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="grade != 99">
     		where userid = #{userid}
   		</if>
-  		order by orderdate desc, state asc
+  		order by ordernum desc
 	</select>
 	
 	<select id="OrderListTotal"  parameterType="MemberDTO" resultType="int">
@@ -77,5 +77,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		where userid = #{userid}
   		</if>
 	</select>
+	
+	<select id="selectState"  parameterType="int" resultType="int">
+		select state from forder
+		where ordernum = #{ordernum}
+	</select>
+
+	<update id="changeState"  parameterType="hashmap">
+		update forder 
+		set state = #{state}
+    	where ordernum = #{ordernum}
+	</update>
 	
 </mapper>

@@ -4,6 +4,77 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("select").on("change", function(event){
+			var beforState = selectState($(this).attr("ordernum-data"), $(this).val());
+		})
+	})
+	function selectState(ordernum, afterState){
+		$.ajax({
+			type : "GET",
+			url : "/Final_Project/adminCheck/selectState",
+			dataType : "text",
+			data : {
+				ordernum : ordernum
+			},
+			success : function(Data, status, xhr) {
+			   changeState(ordernum, Data, afterState);
+			},
+			error : function(xhr, status, error) {
+				console.log("error");
+			}
+		})
+	}
+	function changeState(ordernum, beforState, afterState){
+		$.ajax({
+			type : "PUT",
+			url : "/Final_Project/adminCheck/changeState",
+			dataType : "text",
+			headers: {
+				"Content-Type":"application/json"
+			},
+			data : JSON.stringify({ordernum : ordernum, state :afterState}),
+			success : function(Data, status, xhr) {
+				if(Data == 1){
+				  	var mesg = "주문번호 < " + ordernum +" >의 상태를\n"+stateMesg(beforState)+"에서 "+ stateMesg(afterState)+"로 변경하셨습니다.";
+			   		alert(mesg);
+				} else {
+					alert("상태 변경에 실패했습니다.");
+				}
+			},
+			error : function(xhr, status, error) {
+				console.log("error");
+			}
+		})
+	}
+	
+	function stateMesg(state){
+		var mesg = "";
+		if(state == 10){
+			mesg = "주문 취소";
+		} else if (state == 11){
+			mesg = "주문 신청";
+		}else if (state == 12){
+			mesg = "주문 확인";
+		}else if (state == 13){
+			mesg = "포장 / 발송대기";
+		}else if (state == 14){
+			mesg = "배송중";
+		}else if (state == 15){
+			mesg = "배송 완료";
+		}else if (state == 16){
+			mesg = "구매 확정";
+		}else if (state == 17){
+			mesg = "환불 신청";
+		}else if (state == 18){
+			mesg = "환불 완료";
+		}
+		return mesg;
+	}
+
+</script>
 <div align="center">
 <table width="70%" cellspacing="0" cellpadding="0">
 	<tr>
@@ -51,7 +122,7 @@
 						<span><fmt:formatNumber value='${(order.fprice + order.optionprice) * order.amount}' pattern='###,###,###' /> 원</span>
 					</td>
 					<td height="35" class="td_default" align="center">
-						<select>
+						<select ordernum-data = '${order.ordernum}'>
 								<option value="10" <c:if test="${order.state eq 10}">selected</c:if>>주문 취소</option>
 								<option value="11" <c:if test="${order.state eq 11}">selected</c:if>>주문 신청</option>
 								<option value="12" <c:if test="${order.state eq 12}">selected</c:if>>주문 확인</option>
