@@ -79,5 +79,14 @@ public class OrderDAO {
 		return template.update("OrderMapper.changeState", dto);
 	}
 	
+	public String getCheckMemberId(int ordernum) {
+		
+		return template.selectOne("OrderMapper.getCheckMemberId", ordernum);
+	}
+	
+	public OrderDTO deliveryInfo(OrderDTO dto) {
+		return template.selectOne("OrderMapper.getDeliveryInfo", dto);
+	}
+	
 	
 }

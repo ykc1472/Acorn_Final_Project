@@ -135,7 +135,7 @@
 						</select>
 					</td>
 					<td height="35" class="td_default" align="center">
-						<span><a href="/Final_Project/loginCheck/deliveryInfo?ordernum=${order.ordernum}" target="_blank">${order.orderName}</a></span>
+						<span><a href="/Final_Project/identityCheck/deliveryInfo?ordernum=${order.ordernum}" target="_blank">${order.orderName}</a></span>
 					</td>
 				</tr>
 				</c:forEach>

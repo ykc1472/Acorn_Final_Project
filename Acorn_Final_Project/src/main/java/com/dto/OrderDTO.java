@@ -170,6 +170,9 @@ public class OrderDTO extends FoodInfoDTO {
 	public String toString() {
 		return "OrderDTO [ordernum=" + ordernum + ", userid=" + userid + ", orderdate=" + orderdate + ", state=" + state
 				+ ", amount=" + amount + ", addr_post=" + addr_post + ", payMethod=" + payMethod + ", payment="
-				+ payment + ", addr_f=" + addr_f + ", addr_l=" + addr_l + ", orderName=" + orderName + "]";
+				+ payment + ", addr_f=" + addr_f + ", addr_l=" + addr_l + ", orderName=" + orderName + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
 }

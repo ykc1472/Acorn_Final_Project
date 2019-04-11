@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -123,18 +125,18 @@ public class OrderController {
 		return nextPage;
 	}
 	
-	@RequestMapping("/loginCheck/deliveryInfo")
-	public String deliveryInfo (@RequestParam(value="ordernum", required=false ) int ordernum, HttpSession session){
-		// 구현중.....
-		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
-		String nextPage = "";
-		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
-		
-		
-		nextPage = "deliveryInfo";
-		
-		return nextPage;
-	}
+//	@RequestMapping("/loginCheck/delivryeInfo")
+//	public String deliveryInfo (@RequestParam(value="ordernum", required=false ) int ordernum, HttpSession session){
+//		// 구현중.....
+//		PagingOrderListDTO pagingOrderList = new PagingOrderListDTO();
+//		String nextPage = "";
+//		MemberDTO memberDTO = (MemberDTO)session.getAttribute("loginInfo");
+//		
+//		
+//		nextPage = "deliveryInfo";
+//		
+//		return nextPage;
+//	}
 
 	@RequestMapping(value="/adminCheck/selectState", method=RequestMethod.GET)
 	public @ResponseBody int selectState (@RequestParam(value="ordernum", required=false ) int ordernum){
@@ -147,10 +149,20 @@ public class OrderController {
 		return service.changeState(dto);
 	}
 
-	@RequestMapping(value="/adminCheck/deliveryInfo/", method=RequestMethod.GET)
-	public @ResponseBody int deliveryInfo (@RequestBody OrderDTO dto){
-		
-		return service.changeState(dto);
+	@RequestMapping(value="/identityCheck/deliveryInfo", method=RequestMethod.GET)
+	public String adminDeliveryInfo (@ModelAttribute("orderInfo") OrderDTO dto, HttpSession session, Model m){
+		String nextPage = "";
+		System.out.println(dto);
+		dto = service.deliveryInfo(dto);
+		m.addAttribute("orderInfo", dto);
+		System.out.println(">>" + dto);
+		if(((MemberDTO)session.getAttribute("loginInfo")).getGrade() == 99) {
+			nextPage = "adminDeliveryInfo";
+		}
+		else {
+			nextPage = "memberDeliveryInfo";
+		}
+			return nextPage;
 	}
 	
 }

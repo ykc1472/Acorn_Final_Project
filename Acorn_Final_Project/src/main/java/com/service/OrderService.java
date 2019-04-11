@@ -50,12 +50,20 @@ public class OrderService {
 	public PagingOrderListDTO orderListAll(MemberDTO memberDTO, PagingOrderListDTO pagingOrderList) {
 		return dao.orderListAll(memberDTO, pagingOrderList);
 	}
-	
+
 	public int selectState(int ordernum) {
 		return dao.selectState(ordernum);
 	}
 
 	public int changeState(OrderDTO dto) {
 		return dao.changeState(dto);
+	}
+
+	public String getCheckMemberId(int ordernum) {
+		return dao.getCheckMemberId(ordernum);
+	}
+
+	public OrderDTO deliveryInfo(OrderDTO dto) {
+		return dao.deliveryInfo(dto);
 	}
 }

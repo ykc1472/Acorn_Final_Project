@@ -89,4 +89,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	where ordernum = #{ordernum}
 	</update>
 	
+	<select id="getCheckMemberId" parameterType="int" resultType="string">
+		select userid 
+		from forder 
+		where ordernum = #{ordernum}
+	</select>
+
+	<select id="getDeliveryInfo" parameterType="int" resultType="OrderDTO">
+		select ordernum, userid, to_char(orderdate, 'yy/mm/dd') orderdate, 
+			categoryname, ftitle, content, foption, state, 
+			optionname, fprice, optionprice, fmainimage, orderamount amount, paymethode payMethod, 
+			o_addr_post addr_post, o_addr_f addr_f,	o_addr_l addr_l, o_name ordername
+		from food
+		natural join foodoption
+		natural join forder
+		natural join category 
+   		where ordernum = #{ordernum}
+	</select>
 </mapper>
