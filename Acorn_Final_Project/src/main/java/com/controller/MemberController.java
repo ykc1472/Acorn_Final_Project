@@ -121,9 +121,9 @@ public class MemberController {
 		} else {
 			session.setAttribute("loginInfo", dto);
 			
-			if(session.getAttribute("backPage") != null) {
-				nextPage = (String)session.getAttribute("backPage");
-				session.removeAttribute("backPage");
+			if(session.getAttribute("old_page") != null) {
+				nextPage = "redirect:"+ (String)session.getAttribute("old_page");
+				session.removeAttribute("old_page");
 			}
 			else {
 				nextPage = "redirect:main";

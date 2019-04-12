@@ -66,4 +66,15 @@ public class OrderService {
 	public OrderDTO deliveryInfo(OrderDTO dto) {
 		return dao.deliveryInfo(dto);
 	}
+	
+	public String addressChange(OrderDTO dto) {
+		String mesg = "업데이트에 실패했습니다.";
+		int success = dao.addressChange(dto);
+		
+		if (success == 1 ) {
+			mesg = "업데이트에 성공하였습니다.";
+		}
+		
+		return mesg;
+	}
 }

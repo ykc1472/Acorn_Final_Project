@@ -106,4 +106,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		natural join category 
    		where ordernum = #{ordernum}
 	</select>
+	
+	<update id="addressChange"  parameterType="OrderDTO">
+		update forder 
+		set o_addr_post = #{addr_post},
+		o_addr_f = #{addr_f},
+		o_addr_l = #{addr_l},
+		o_name = #{orderName}
+    	where ordernum = #{ordernum}
+	</update>
 </mapper>

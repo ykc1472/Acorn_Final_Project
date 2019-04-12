@@ -164,5 +164,12 @@ public class OrderController {
 		}
 			return nextPage;
 	}
+
+	@RequestMapping(value="/identityCheck/addressChange", method=RequestMethod.GET)
+	public @ResponseBody String addressChange (@ModelAttribute OrderDTO dto){
+		System.out.println(dto);
+		return service.addressChange(dto);
+		
+	}
 	
 }

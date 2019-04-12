@@ -15,6 +15,9 @@ public class LoginCheckIntercepter extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		System.out.println("preHandle");
 		
+		String old_url = request.getHeader("referer");
+		session.setAttribute("old_url", old_url);
+		
 		if(session.getAttribute("loginInfo") == null) {
 			response.sendRedirect("/Final_Project/loginForm");
 			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");

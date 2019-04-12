@@ -1,6 +1,5 @@
 package com.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -86,6 +85,10 @@ public class OrderDAO {
 	
 	public OrderDTO deliveryInfo(OrderDTO dto) {
 		return template.selectOne("OrderMapper.getDeliveryInfo", dto);
+	}
+
+	public int addressChange(OrderDTO dto) {
+		return template.update("OrderMapper.addressChange", dto);
 	}
 	
 	
