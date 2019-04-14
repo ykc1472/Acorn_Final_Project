@@ -29,7 +29,7 @@
 				dataType : "text",
 				data : {
 					ordernum : $(this).attr("ordernum-data"),
-					ordername : $("#ordername").val(),
+					orderName : $("#ordername").val(),
 					addr_post : $("#addr_post").val(),
 					addr_f : $("#addr_f").val(),
 					addr_l : $("#addr_l").val()

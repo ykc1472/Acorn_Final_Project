@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" name="userpw" id="userpw">
+					<input type="password" name="userpw" id="userpw">
 				</td>
 			</tr>
 			<tr>

@@ -61,4 +61,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where fcode = #{fcode}
 		and foption = #{foption}
 	</select>
+	
+	<select id="bestFood" resultType="FoodInfoDTO">
+		<![CDATA[
+		select rownum, count, fcode, ftitle, fprice, categoryname, fmainimage 
+		from (select count(fcode) count, fcode, ftitle, fprice, categoryname, fmainimage 
+	     		from forder natural join food natural join category natural join foodoption 
+	      		where state = 16 
+	      		group by fcode, ftitle, fprice, categoryname, fmainimage
+	      		order by count desc
+	      	)
+	    where rownum <= 5
+	    ]]>
+	</select>
 </mapper>
