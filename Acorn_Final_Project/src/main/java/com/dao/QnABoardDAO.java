@@ -36,8 +36,20 @@ public class QnABoardDAO {
 	}
 	
 	public QnABoardDTO selectQnABoard(int qna_num) {
+		template.update("BoardMapper.readCount", qna_num);
 		
 		return template.selectOne("BoardMapper.selectQnABoard", qna_num);
+	}
+
+	public QnABoardDTO selectQnACommentBoard(int qna_num) {
+		template.update("BoardMapper.readCountComment", qna_num);
+		
+		return template.selectOne("BoardMapper.selectQnACommentBoard", qna_num);
+	}
+	
+	public int writeBoard(QnABoardDTO dto) {
+		
+		return template.insert("BoardMapper.writeBoard", dto);
 	}
 	
 	

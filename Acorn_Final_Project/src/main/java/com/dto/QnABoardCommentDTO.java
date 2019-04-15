@@ -10,6 +10,8 @@ public class QnABoardCommentDTO {
 	private String rewritedate;
 	private String nickname;
 	private String content;
+	private int readCount;
+	
 
 	public QnABoardCommentDTO() {
 		super();
@@ -27,8 +29,6 @@ public class QnABoardCommentDTO {
 		this.content = content;
 	}
 
-	
-	
 	public int getQna_num() {
 		return qna_num;
 	}
@@ -76,10 +76,20 @@ public class QnABoardCommentDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public int getReadCount() {
+		return readCount;
+	}
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
 
 	@Override
 	public String toString() {
-		return "QnABorderDTO [qna_num=" + qna_num + ", qnac_title=" + qnac_title + ", writedate=" + writedate
-				+ ", rewritedate=" + rewritedate + ", nickname=" + nickname + ", content=" + content + "]";
+		return "QnABoardCommentDTO [qna_num=" + qna_num + ", qnac_title=" + qnac_title + ", writedate=" + writedate
+				+ ", rewritedate=" + rewritedate + ", nickname=" + nickname + ", content=" + content + ", readCount="
+				+ readCount + "]";
 	}
+
 }

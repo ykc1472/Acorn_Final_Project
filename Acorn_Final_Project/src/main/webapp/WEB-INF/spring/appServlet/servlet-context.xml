@@ -9,8 +9,7 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
@@ -51,6 +50,7 @@
 	<mvc:view-controller path="/passwdSearch" view-name="passwdSearch"/>
 	<mvc:view-controller path="/orderConfirmUI" view-name="orderConfirm" />
 	<mvc:view-controller path="/foodManagement" view-name="foodManagement" />
+	<mvc:view-controller path="/loginCheck/qnawriteboardForm" view-name="qna_writeboardForm" />
 	
 	<!-- interceptor 처리 (Login Check) -->
 	<mvc:interceptors>

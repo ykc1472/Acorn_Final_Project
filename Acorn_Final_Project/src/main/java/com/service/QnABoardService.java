@@ -15,13 +15,21 @@ public class QnABoardService {
 
 	@Transactional
 	public PagingQnABoardDTO selectAllQnABorder(PagingQnABoardDTO paging) {
-
-
 		return dao.selectAllQnABoard(paging);
 	}
 
 	@Transactional
 	public QnABoardDTO seleclt(int qna_num) {
 		return dao.selectQnABoard(qna_num);
+	}
+
+	@Transactional
+	public int writeBoard(QnABoardDTO dto) {
+		return dao.writeBoard(dto);
+	}
+	
+	@Transactional
+	public QnABoardDTO selectQnACommentBoard(int qna_num) {
+		return dao.selectQnACommentBoard(qna_num);
 	}
 }

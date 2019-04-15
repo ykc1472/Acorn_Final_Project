@@ -10,7 +10,9 @@ public class QnABoardDTO {
 	private String content;
 	private String writedate;
 	private String rewritedate;
-	private int qna_option;
+	private String userid;
+	private int readCount;
+	private int qna_option = 3;
 
 	public QnABoardDTO() {
 		super();
@@ -107,11 +109,29 @@ public class QnABoardDTO {
 		this.qna_option = qna_option;
 	}
 
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
+
+	public int getReadCount() {
+		return readCount;
+	}
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
 	@Override
 	public String toString() {
-		return "QnABorderDTO [qna_num=" + qna_num + ", qna_title=" + qna_title + ", nickname=" + nickname + ", content="
-				+ content + ", writedate=" + writedate + ", rewritedate=" + rewritedate + ", qna_option=" + qna_option
-				+ "]";
+		return "QnABoardDTO [qna_num=" + qna_num + ", qna_title=" + qna_title + ", nickname=" + nickname + ", content="
+				+ content + ", writedate=" + writedate + ", rewritedate=" + rewritedate + ", userid=" + userid
+				+ ", readCount=" + readCount + ", qna_option=" + qna_option + "]";
 	}
+
 
 }

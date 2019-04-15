@@ -18,11 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectAllQnABoard" resultType="QnABoardDTO">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option from qnaboard
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option, readcount from qnaboard
+		order by qna_num desc
 	</select>
 	
 	<select id="selectQnaCommentList" resultType="QnABoardCommentDTO" parameterType="arraylist">
-		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, content, nickname from qnaboardcomment
+		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, content, nickname, readcount from qnaboardcomment
 		where qna_num in 
 		<foreach collection="list" open="(" separator="," close=")" item="item">#{item.qna_num}</foreach>
 	</select>
@@ -37,4 +38,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where qna_num = #{qna_num}
 	</select>
 	
+	<insert id="writeBoard" parameterType="QnABoardDTO">
+		insert into qnaboard value(qna_num, qna_title, nickname, content, qna_option, userid)
+		values (QNAboard_NUM.nextval, #{qna_title}, #{nickname}, #{content}, #{qna_option}, #{userid})
+	</insert>
+	
+	<update id="readCount"  parameterType="int">
+		update qnaboard
+		set readcount = readcount + 1
+		where qna_num = #{qna_num}
+	</update>
+ 
+	<select id="selectQnACommentBoard" resultType="QnABoardDTO" parameterType="int">
+		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, readcount
+		from qnaboardcomment
+		where qna_num = #{qna_num}
+	</select>
+	
+	<update id="readCountComment"  parameterType="int">
+		update qnaboardcomment
+		set readcount = readcount + 1
+		where qna_num = #{qna_num}
+	</update>
+
 </mapper>

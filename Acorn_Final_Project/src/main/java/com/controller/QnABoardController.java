@@ -1,7 +1,7 @@
 package com.controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dto.MemberDTO;
 import com.dto.PagingQnABoardDTO;
 import com.dto.QnABoardDTO;
 import com.service.QnABoardService;
@@ -21,8 +22,7 @@ public class QnABoardController {
 	@RequestMapping("/qnaBoardForm")
 	public String qnaBoardForm(@RequestParam("pick") int pick, HttpServletRequest request) {
 		
-		QnABoardDTO dto = service.seleclt(pick);
-		request.setAttribute("QnABoard", dto);
+		request.setAttribute("QnABoard", service.seleclt(pick));
 		
 		return "qna_boardForm";
 	}
@@ -34,11 +34,22 @@ public class QnABoardController {
 
 		return "qna_boardListForm";
 	}
-	
-//	@RequestMapping("/asdsa")
-//	public String qnaBoardComment() {
-//		
-//		return "";
-//	}
 
+	@RequestMapping("/loginCheck/writeBoard")
+	public String writeBoard(@ModelAttribute QnABoardDTO dto, HttpSession session) {
+		dto.setNickname(((MemberDTO)session.getAttribute("loginInfo")).getUsernickname());
+		dto.setUserid(((MemberDTO)session.getAttribute("loginInfo")).getUserid());	
+		
+		service.writeBoard(dto);
+		return "redirect:../qnaBoardListForm";
+	}
+	
+	@RequestMapping("/qnaCommentBoardForm")
+	public String qnaCommentBoardForm(@RequestParam("pick") int pick, HttpServletRequest request) {
+		
+		request.setAttribute("QnABoard", service.selectQnACommentBoard(pick));
+	
+		return "qna_boardForm";
+	}
+	
 }

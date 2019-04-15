@@ -32,6 +32,7 @@
 			<col width="500" />
 			<col width="150" />
 			<col width="155" />
+			<col width="100" />
 		</colgroup>
 		<thead>
 			<tr>
@@ -39,7 +40,7 @@
 				<th>제 목</th>
 				<th>작성자</th>
 				<th>작성일</th>
-				
+				<th>조회수</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,14 +50,16 @@
 				<td>${list.qna_title}</td>
 				<td align="center">${list.nickname}</td>
 				<td align="center">${list.writedate}</td>
+				<td align="center">${list.readCount}</td>
 			</tr>
 			<c:forEach var="commentlist" items="${paging.qnacommentlist}">
 				<c:if test="${commentlist.qna_num == list.qna_num}">
 					<tr class="board" onclick="location.href='qnaBoardForm?pick=${list.qna_num}'">
 						<td align="center">&nbsp;ㄴ</td>
-						<td><a href="qna_CommentBoardForm?pick=${commentlist.qna_num}">${commentlist.qnac_title}</a></td>
+						<td><a href="qnaCommentBoardForm?pick=${commentlist.qna_num}">${commentlist.qnac_title}</a></td>
 						<td align="center">${commentlist.nickname}</td>
 						<td align="center">${commentlist.writedate}</td>
+						<td align="center">${commentlist.readCount}</td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -65,15 +68,22 @@
 	
 		<tfoot>
 			<tr>
-				<td align="center" colspan="5">
-					<span id ="selectPage" style="color: red;">
-						1
-					</span>
-				</td>
+				<td colspan="5" align="center">
+				<c:forEach var="i" end="${paging.totalpage}" begin="1">
+					<c:choose>
+						<c:when test="${i eq paging.page}">
+							<span style="color: red">${i}</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="qnaBoardListForm?page=${i}">${i}</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</td>
 			</tr>
 		</tfoot>		
 	</table>
 		
-		<input type="button" value="처음으로" onclick="move('Board_List.jsp');" />
-		<input type="button" value="글쓰기" onclick="move('Board_Write.jsp');" />
+		<input type="button" value="처음으로" onclick="move('qnaBoardListForm');" />
+		<input type="button" value="글쓰기" onclick="move('loginCheck/qnawriteboardForm');" />
 </div>
