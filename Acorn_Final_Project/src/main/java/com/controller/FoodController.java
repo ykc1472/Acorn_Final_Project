@@ -108,10 +108,24 @@ public class FoodController {
 		if(page != 0) {
 			paging.setPage(page);
 		}
-		System.out.println(paging);
+
 		paging = service.foodNewList(paging);
 		request.setAttribute("flist", paging);
 		
-		return "foodListForm";
+		return "foodNewListForm";
 	}
+
+	@RequestMapping("/bestSeller")
+	public String bestSellerFoodList(@RequestParam(value="page", required=false, defaultValue="0") int page, HttpServletRequest request) {
+		PagingFoodListDTO paging = new PagingFoodListDTO();
+		if(page != 0) {
+			paging.setPage(page);
+		}
+		
+		paging = service.bestSeller(paging);
+		System.out.println(paging);
+		request.setAttribute("flist", paging);
+		
+		return "foodBestListForm";
+	}	
 }

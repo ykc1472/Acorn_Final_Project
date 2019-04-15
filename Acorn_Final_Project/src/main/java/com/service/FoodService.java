@@ -43,6 +43,11 @@ public class FoodService {
 	}
 	
 	@Transactional
+	public PagingFoodListDTO bestSeller(PagingFoodListDTO paging){
+		return dao.bestSeller(paging);
+	}
+	
+	@Transactional
 	public List<HashMap<String, String>> searchFoodList(String search){
 		List<HashMap<String, String>> list = null;
 		list = dao.searchFoodList(search);

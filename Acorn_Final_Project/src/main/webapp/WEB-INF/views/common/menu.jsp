@@ -3,7 +3,7 @@
 	<table>
 		<tr>
 			<td width="120" align='center'><a href="/Final_Project/newFoodList" class="menu">New</a></td>
-			<td width="120" align='center'><a href="#" class="menu">Best</a></td>
+			<td width="120" align='center'><a href="/Final_Project/bestSeller" class="menu">Best</a></td>
 			<td width="120" align='center'><a href="/Final_Project/FoodList?category=1" class="menu">생수·음료·주스</a></td>
 			<td width="120" align='center'><a href="/Final_Project/FoodList?category=2" class="menu">커피·차</a></td>
 			<td width="120" align='center'><a href="/Final_Project/FoodList?category=3" class="menu">유제품</a></td>
