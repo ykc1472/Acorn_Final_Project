@@ -30,7 +30,7 @@ public class MailController {
 				helper.setFrom(mailInfo.getFormNickName());
 				helper.setTo(mailInfo.getUseremail());
 				helper.setSubject(mailInfo.getMailtitle());
-				helper.setText(mailInfo.getMesg(), true);
+				helper.setText(mailInfo.getMesg().replace("\n", "<br>"), true);
 			}
 		};
 		mailSender.send(preparator);

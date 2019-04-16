@@ -18,12 +18,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectAllQnABoard" resultType="QnABoardDTO">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option, readcount from qnaboard
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option, readcount, userid
+		from qnaboard
 		order by qna_num desc
 	</select>
 	
 	<select id="selectQnaCommentList" resultType="QnABoardCommentDTO" parameterType="arraylist">
-		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, content, nickname, readcount from qnaboardcomment
+		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, content, nickname, readcount 
+		from qnaboardcomment
 		where qna_num in 
 		<foreach collection="list" open="(" separator="," close=")" item="item">#{item.qna_num}</foreach>
 	</select>
@@ -33,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectQnABoard" resultType="QnABoardDTO" parameterType="int">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, qna_option
 		from qnaboard
 		where qna_num = #{qna_num}
 	</select>
@@ -49,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where qna_num = #{qna_num}
 	</update>
  
-	<select id="selectQnACommentBoard" resultType="QnABoardDTO" parameterType="int">
+	<select id="selectQnACommentBoard" resultType="QnABoardCommentDTO" parameterType="int">
 		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, readcount
 		from qnaboardcomment
 		where qna_num = #{qna_num}
@@ -61,4 +63,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where qna_num = #{qna_num}
 	</update>
 
+	<update id="deleteQnaBoard"  parameterType="QnABoardDTO">
+		update qnaboard
+		set qna_option = 0
+		where qna_num = #{qna_num} 
+	</update>
+
+	<select id="userEmail" resultType="string" parameterType="QnABoardDTO">
+		select email 
+		from qnaboard 
+		natural join member 
+		where qna_num = #{qna_num}
+	</select>
+
+	<insert id="writeCommentBoard" parameterType="QnABoardCommentDTO">
+		insert into qnaboardcomment (qna_num, qnac_title, nickname, content)
+		values (#{qna_num}, #{qna_title}, #{nickname}, #{content})
+	</insert>
 </mapper>

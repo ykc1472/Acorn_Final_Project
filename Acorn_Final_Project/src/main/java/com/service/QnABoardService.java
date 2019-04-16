@@ -1,11 +1,15 @@
 package com.service;
 
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dao.QnABoardDAO;
+import com.dto.MailDTO;
 import com.dto.PagingQnABoardDTO;
+import com.dto.QnABoardCommentDTO;
 import com.dto.QnABoardDTO;
 
 @Service
@@ -19,8 +23,8 @@ public class QnABoardService {
 	}
 
 	@Transactional
-	public QnABoardDTO seleclt(int qna_num) {
-		return dao.selectQnABoard(qna_num);
+	public QnABoardDTO seleclt(int qna_num, HashSet<Integer> set) {
+		return dao.selectQnABoard(qna_num, set);
 	}
 
 	@Transactional
@@ -29,7 +33,25 @@ public class QnABoardService {
 	}
 	
 	@Transactional
-	public QnABoardDTO selectQnACommentBoard(int qna_num) {
-		return dao.selectQnACommentBoard(qna_num);
+	public QnABoardCommentDTO selectQnACommentBoard(int qna_num, HashSet<Integer> set) {
+		return dao.selectQnACommentBoard(qna_num, set);
 	}
+	@Transactional
+	public void deleteQnaBoard(QnABoardDTO dto) {
+		dao.deleteQnaBoard(dto);
+	}
+	
+	@Transactional
+	public MailDTO writeCommentBoard(QnABoardDTO dto) {
+		
+		MailDTO mail = new MailDTO();
+		mail.setNextPage("redirect:../qnaBoardListForm");
+		mail.setUseremail(dao.writeCommentBoard(dto));
+		mail.setMailtitle(dto.getQna_title());
+		mail.setMesg(dto.getContent());
+		mail.setFormNickName(dto.getNickname());
+		
+		return mail;
+	}
+	
 }

@@ -31,7 +31,7 @@
 			<col width="100" />
 			<col width="500" />
 			<col width="150" />
-			<col width="155" />
+			<col width="160" />
 			<col width="100" />
 		</colgroup>
 		<thead>
@@ -45,18 +45,46 @@
 		</thead>
 		<tbody>
 		<c:forEach var="list" items="${paging.qnaboardlist}">
-			<tr onclick="location.href='qnaBoardForm?pick=${list.qna_num}'" class="board">
-				<td align="center">${list.qna_num}</td>
-				<td>${list.qna_title}</td>
+			<c:choose>
+				<c:when test="${(list.qna_option eq 0) && loginInfo.grade ne 99}">
+					<tr class="board">
+						<td align="center">${list.qna_num}</td>
+						<td>삭제된 글입니다.</td>
+				</c:when>
+				<c:when test="${(list.qna_option eq 1 || list.qna_option eq 2) && loginInfo.userid ne list.userid && loginInfo.grade ne 99}">
+					<tr class="board">
+						<td align="center">${list.qna_num}</td>
+						<td>${list.qna_title} / ${userInfo.userid}  ${list.userid}<img src="image/item/lock.png" width="30px"></td>
+				</c:when>
+				<c:otherwise>
+					<tr onclick="location.href='qnaBoardForm?pick=${list.qna_num}'" class="board">
+						<td align="center">${list.qna_num}</td>
+						<td>${list.qna_title} <c:if test="${list.qna_option eq 0 }">[삭제]</c:if></td>
+				</c:otherwise>
+			</c:choose>
 				<td align="center">${list.nickname}</td>
 				<td align="center">${list.writedate}</td>
 				<td align="center">${list.readCount}</td>
 			</tr>
 			<c:forEach var="commentlist" items="${paging.qnacommentlist}">
 				<c:if test="${commentlist.qna_num == list.qna_num}">
-					<tr class="board" onclick="location.href='qnaBoardForm?pick=${list.qna_num}'">
-						<td align="center">&nbsp;ㄴ</td>
-						<td><a href="qnaCommentBoardForm?pick=${commentlist.qna_num}">${commentlist.qnac_title}</a></td>
+					<c:choose>
+						<c:when test="${(list.qna_option eq 0) && loginInfo.grade ne 99}">
+							<tr class="board">
+								<td align="center">${list.qna_num}</td>
+								<td>삭제된 글입니다.</td>
+						</c:when>
+						<c:when test="${(list.qna_option eq 1 || list.qna_option eq 2) && loginInfo.userid ne list.userid && loginInfo.grade ne 99}">
+							<tr class="board">
+								<td align="center">&nbsp;ㄴ</td>
+								<td>${commentlist.qnac_title}<img src="image/item/lock.png" width="30px"></td>
+						</c:when>
+						<c:otherwise>
+							<tr class="board" onclick="location.href='qnaCommentBoardForm?pick=${list.qna_num}'">
+								<td align="center">&nbsp;ㄴ</td>
+								<td>${commentlist.qnac_title}<c:if test="${list.qna_option eq 0 }">[삭제]</c:if></td>
+						</c:otherwise>
+					</c:choose>
 						<td align="center">${commentlist.nickname}</td>
 						<td align="center">${commentlist.writedate}</td>
 						<td align="center">${commentlist.readCount}</td>

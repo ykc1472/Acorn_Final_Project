@@ -3,6 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#passwd").on("click", function(event){
+			/* var passwd = prompt("비밀번호를 입력하세요.", ""); */
+			var qna_num = $(this).attr("boardnum-data");
+			var boardTitle = $(this).attr("title-data");
+			console.log(qna_num);
+		    if (confirm("QnA게시판의 제목 : " +qna_num+". "+ boardTitle + "\n을 정말로 삭제하시겠습니까?") == true) {
+		    	location.href="/Final_Project/adminCheck/deleteQnaBoard?qna_num="+qna_num;
+		    }
+		    
+		});
+	})
+</script>
 <div align="center">
 	<form action="#" method="post">
 		<table border="1">
@@ -31,12 +45,15 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="right">
-					<c:if test="${loginInfo.usernickname == QnABoard.nickname}">
+					<c:if test="${loginInfo.userid == QnABoard.userid}">
 						<a href="#">수정</a>&nbsp;
 						<a href="#">삭제</a>
 					</c:if>
-					<c:if test="${loginInfo.grade == 99}">
-						<a href="#">관리자 삭제 기능</a>
+					<c:if test="${loginInfo.grade == 99 && QnABoard.qna_option != 0}">
+						<a id="passwd" title-data="${QnABoard.qna_title}" boardnum-data="${QnABoard.qna_num}" href="#">관리자 삭제 기능</a>&nbsp;&nbsp;&nbsp;
+						<c:if test="${!(QnABoard.qna_option eq 0 || QnABoard.qna_option eq 2 || QnABoard.qna_option eq 4)}">
+							<a href="/Final_Project/admenCheck/writeCommentBoardForm?pick=${QnABoard.qna_num}">답변</a>
+						</c:if>
 					</c:if>
 				</td>
 			</tr>

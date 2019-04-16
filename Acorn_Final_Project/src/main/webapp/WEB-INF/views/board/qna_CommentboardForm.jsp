@@ -8,7 +8,7 @@
 		<table border="1">
 			<tr>
 				<th>제목</th>
-				<td colspan="3"><span>${QnABoard.qna_num}.${QnABoard.qnac_title}</span></td>
+				<td colspan="3"><span>${QnABoard.qna_num}. ${QnABoard.qnac_title}</span></td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
@@ -31,12 +31,9 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="right">
-					<c:if test="${loginInfo.usernickname == QnABoard.nickname}">
-						<a href="#">수정</a>&nbsp;
-						<a href="#">삭제</a>
-					</c:if>
 					<c:if test="${loginInfo.grade == 99}">
-						<a href="#">관리자 삭제 기능</a>
+						<a href="#">수정</a>&nbsp;
+						<a href="#">관리자 삭제 기능</a>&nbsp;&nbsp;
 					</c:if>
 				</td>
 			</tr>

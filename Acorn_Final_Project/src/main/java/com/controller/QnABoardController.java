@@ -1,14 +1,20 @@
 package com.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dto.MailDTO;
 import com.dto.MemberDTO;
 import com.dto.PagingQnABoardDTO;
 import com.dto.QnABoardDTO;
@@ -20,10 +26,14 @@ public class QnABoardController {
 	QnABoardService service;
 
 	@RequestMapping("/qnaBoardForm")
-	public String qnaBoardForm(@RequestParam("pick") int pick, HttpServletRequest request) {
-		
-		request.setAttribute("QnABoard", service.seleclt(pick));
-		
+	public String qnaBoardForm(@RequestParam("pick") int pick, HttpServletRequest request, HttpSession session) {
+		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readBoard");
+		if (set == null) {
+			set = new HashSet<>();
+		}
+		request.setAttribute("QnABoard", service.seleclt(pick, set));
+		set.add(pick);
+		session.setAttribute("readBoard", set);
 		return "qna_boardForm";
 	}
 	
@@ -45,11 +55,55 @@ public class QnABoardController {
 	}
 	
 	@RequestMapping("/qnaCommentBoardForm")
-	public String qnaCommentBoardForm(@RequestParam("pick") int pick, HttpServletRequest request) {
+	public String qnaCommentBoardForm(@RequestParam("pick") int pick, HttpServletRequest request, HttpSession session) {
 		
-		request.setAttribute("QnABoard", service.selectQnACommentBoard(pick));
+		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readCommentBoard");
+		if (set == null) {
+			set = new HashSet<>();
+		}
+		request.setAttribute("QnABoard", service.selectQnACommentBoard(pick, set));
+		
+		set.add(pick);
+		session.setAttribute("readCommentBoard", set);
+		
+		return "qna_CommentboardForm";
+	}
 	
-		return "qna_boardForm";
+	@RequestMapping("/admenCheck/writeCommentBoardForm")
+	public String qnawriteCommentBoardForm(@RequestParam("pick") int pick, Model m, HttpSession session) {
+	
+		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readBoard");
+		if (set == null) {
+			set = new HashSet<>();
+		}
+		QnABoardDTO dto = service.seleclt(pick, set);
+		
+		set.add(pick);
+		session.setAttribute("readCommentBoard", set);
+		
+		dto.setContent(dto.getContent() + "\n ======================================================================================================== \n");
+		
+		m.addAttribute("boardInfo", dto);
+		
+		return "qna_writeCommentboardForm";
+	}
+	
+	@RequestMapping("/admenCheck/writeBoard")
+	public String qnawriteCommentBoard(@ModelAttribute QnABoardDTO dto, HttpSession session, Model model) {
+		
+		dto.setNickname(((MemberDTO)session.getAttribute("loginInfo")).getUsernickname());
+		dto.setUserid(((MemberDTO)session.getAttribute("loginInfo")).getUserid());
+		model.addAttribute("mailInfo", service.writeCommentBoard(dto));
+		
+		return "forward:../sendMail";
+	}
+
+	@RequestMapping("/adminCheck/deleteQnaBoard")
+	public String deleteQnaBoard(@ModelAttribute QnABoardDTO dto) {
+		System.out.println(dto);
+		service.deleteQnaBoard(dto);
+		
+		return "redirect:../qnaBoardListForm";
 	}
 	
 }
