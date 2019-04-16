@@ -15,6 +15,28 @@
 		    }
 		    
 		});
+		$("#update").on("click", function(event){
+			var passwd = prompt("비밀번호를 입력하세요.", "");
+			var qna_num = $(this).attr("boardnum-data");
+			$.ajax({
+				type : "GET",
+				url : "/Final_Project/loginCheck/passwordCheck",
+				dataType : "text",
+				data : {
+					userpw : passwd
+				},
+				success : function(Data, status, xhr) {
+					if(Data == true){
+						location.href="/Final_Project/adminCheck/deleteQnaBoard?qna_num="+qna_num;
+					} else{
+						alert("비밀번호가 틀렸습니다.");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.log("error");
+				}
+			})
+		});
 	})
 </script>
 <div align="center">
@@ -46,7 +68,9 @@
 			<tr>
 				<td colspan="4" align="right">
 					<c:if test="${loginInfo.userid == QnABoard.userid}">
-						<a href="#">수정</a>&nbsp;
+						<c:if test="${QnABoard.qna_option == 1 || QnABoard.qna_option == 3}">
+							<a href="#" id="update" boardnum-data="${QnABoard.qna_num}">수정</a>&nbsp;
+						</c:if>
 						<a href="#">삭제</a>
 					</c:if>
 					<c:if test="${loginInfo.grade == 99 && QnABoard.qna_option != 0}">

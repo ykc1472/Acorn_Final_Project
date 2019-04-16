@@ -85,4 +85,17 @@ public class QnABoardDAO {
 		return template.selectOne("BoardMapper.userEmail", dto);
 	}
 
+	public void updateCommentBoard(QnABoardDTO dto) {
+		template.update("BoardMapper.updateCommentBoard", dto);
+		
+	}
+	public void updateBoard(QnABoardDTO dto) {
+		template.update("BoardMapper.updateBoard", dto);
+		
+	}
+
+	public String passwordCheck(String userid) {
+		return template.selectOne("MemberMapper.passwordCheck", userid);
+	}
+
 }

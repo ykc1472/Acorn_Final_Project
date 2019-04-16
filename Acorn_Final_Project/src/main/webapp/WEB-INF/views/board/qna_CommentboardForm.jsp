@@ -3,6 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#updateCommentBoard").on("click", function(event){
+			
+		})
+	})
+</script>
 <div align="center">
 	<form action="#" method="post">
 		<table border="1">
@@ -32,8 +39,7 @@
 			<tr>
 				<td colspan="4" align="right">
 					<c:if test="${loginInfo.grade == 99}">
-						<a href="#">수정</a>&nbsp;
-						<a href="#">관리자 삭제 기능</a>&nbsp;&nbsp;
+						<a href="/Final_Project/adminCheck/updateQnaCommentBoardForm?qna_num=${QnABoard.qna_num}">수정</a>&nbsp;
 					</c:if>
 				</td>
 			</tr>

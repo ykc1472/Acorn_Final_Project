@@ -100,10 +100,47 @@ public class QnABoardController {
 
 	@RequestMapping("/adminCheck/deleteQnaBoard")
 	public String deleteQnaBoard(@ModelAttribute QnABoardDTO dto) {
-		System.out.println(dto);
 		service.deleteQnaBoard(dto);
 		
 		return "redirect:../qnaBoardListForm";
+	}
+
+	@RequestMapping("/adminCheck/updateQnaCommentBoardForm")
+	public String updateQnaCommentBoard(@ModelAttribute QnABoardDTO dto, HttpSession session, Model model) {
+		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readCommentBoard");
+		if (set == null) {
+			set = new HashSet<>();
+		}
+		model.addAttribute("boardInfo", service.selectQnACommentBoard(dto.getQna_num(), set));
+		
+		set.add(dto.getQna_num());
+		session.setAttribute("readCommentBoard", set);
+		
+		return "qna_updateCommentboardForm";
+	}
+	
+	@RequestMapping("/loginCheck/updateBoard")
+	public String updateQnaBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
+		System.out.println(dto);
+		service.updateBoard(dto);
+		
+		return "qna_boardForm";
+	}
+	
+	@RequestMapping("/admenCheck/updateCommentBoard")
+	public String updateQnaCommentBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
+		System.out.println(dto);
+		service.updateCommentBoard(dto);
+		
+		return "qna_CommentboardForm";
+	}
+
+	@RequestMapping("/loginCheck/passwordCheck")
+	public String passwardCheck(@RequestParam("userpw") String userpw, HttpSession session) {
+		
+		service.passwordCheck(((MemberDTO)session.getAttribute("loginInfo")).getUserid(), userpw);
+		
+		return "qna_CommentboardForm";
 	}
 	
 }

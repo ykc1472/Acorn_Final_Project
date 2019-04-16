@@ -40,6 +40,21 @@ public class QnABoardService {
 	public void deleteQnaBoard(QnABoardDTO dto) {
 		dao.deleteQnaBoard(dto);
 	}
+
+	@Transactional
+	public void updateCommentBoard(QnABoardDTO dto) {
+		dao.updateCommentBoard(dto);
+	}
+	
+	@Transactional
+	public void updateBoard(QnABoardDTO dto) {
+		dao.updateBoard(dto);
+	}
+
+	@Transactional
+	public boolean passwordCheck(String userid, String userpw) {
+		return userpw.equals(dao.passwordCheck(userid));
+	}
 	
 	@Transactional
 	public MailDTO writeCommentBoard(QnABoardDTO dto) {

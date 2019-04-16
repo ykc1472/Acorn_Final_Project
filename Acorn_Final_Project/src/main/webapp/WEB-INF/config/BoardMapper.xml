@@ -9,13 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (QNAboard_NUM.nextval, #{qnaboard.qna_title}, #{qnaboard.nickname}, #{qnaboard.content} <if test="dto.qna_option != null">#{qnaboard.qna_option}</if>)
 	</insert>
 
-	<update id="updateIntoQnABoard" parameterType="QnABoardDTO">
+<!-- 	<update id="updateIntoQnABoard" parameterType="QnABoardDTO">
 		update qnaboard
 		set qna_title = #{qnaboard.title},
 		content = #{qnaboard.content},
 		rewritedate = sysdate
 		where qna_num = #{qnaboard.qna_num}
-	</update>
+	</update> -->
 	
 	<select id="selectAllQnABoard" resultType="QnABoardDTO">
 		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option, readcount, userid
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectQnABoard" resultType="QnABoardDTO" parameterType="int">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, qna_option
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, qna_option, userid
 		from qnaboard
 		where qna_num = #{qna_num}
 	</select>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
  
 	<select id="selectQnACommentBoard" resultType="QnABoardCommentDTO" parameterType="int">
-		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, readcount
+		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, readcount, userid
 		from qnaboardcomment
 		where qna_num = #{qna_num}
 	</select>
@@ -80,4 +80,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into qnaboardcomment (qna_num, qnac_title, nickname, content)
 		values (#{qna_num}, #{qna_title}, #{nickname}, #{content})
 	</insert>
+
+	<update id="updateCommentBoard" parameterType="QnABoardCommentDTO">
+		update qnaboardcomment
+		set qnac_title = #{qna_title},
+		content = #{content},
+		rewritedate = sysdate
+		where qna_num = #{qna_num}
+	</update>
+	
+	<update id="updateBoard" parameterType="QnABoardCommentDTO">
+		update qnaboard
+		set qna_title = #{qna_title},
+		content = #{content},
+		rewritedate = sysdate
+		where qna_num = #{qna_num}
+	</update>
+	
+	<select id="passwordCheck" resultType="string" parameterType="String">
+		select userpw
+		from member
+		where userid = #{userid}
+	</select>
 </mapper>
