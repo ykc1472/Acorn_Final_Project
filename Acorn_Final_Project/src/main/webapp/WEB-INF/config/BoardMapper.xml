@@ -18,13 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update> -->
 	
 	<select id="selectAllQnABoard" resultType="QnABoardDTO">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate,  qna_option, readcount, userid
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') writedate,  qna_option, readcount, userid
 		from qnaboard
 		order by qna_num desc
 	</select>
 	
 	<select id="selectQnaCommentList" resultType="QnABoardCommentDTO" parameterType="arraylist">
-		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, content, nickname, readcount 
+		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') writedate, content, nickname, readcount 
 		from qnaboardcomment
 		where qna_num in 
 		<foreach collection="list" open="(" separator="," close=")" item="item">#{item.qna_num}</foreach>
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectQnABoard" resultType="QnABoardDTO" parameterType="int">
-		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, qna_option, userid
+		select qna_num, qna_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') rewritedate, qna_option, userid
 		from qnaboard
 		where qna_num = #{qna_num}
 	</select>
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
  
 	<select id="selectQnACommentBoard" resultType="QnABoardCommentDTO" parameterType="int">
-		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일"') rewritedate, readcount, userid
+		select qna_num, qnac_title, nickname, content, to_char(writedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') writedate, to_char(rewritedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') rewritedate, readcount
 		from qnaboardcomment
 		where qna_num = #{qna_num}
 	</select>
@@ -93,13 +93,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update qnaboard
 		set qna_title = #{qna_title},
 		content = #{content},
-		rewritedate = sysdate
+		rewritedate = sysdate,
+		qna_option = #{qna_option}
 		where qna_num = #{qna_num}
 	</update>
 	
-	<select id="passwordCheck" resultType="string" parameterType="String">
+	<select id="passwordCheck" resultType="string" parameterType="string">
 		select userpw
 		from member
 		where userid = #{userid}
 	</select>
+	
 </mapper>

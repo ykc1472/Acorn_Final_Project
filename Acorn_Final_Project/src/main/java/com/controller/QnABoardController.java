@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,11 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dto.MailDTO;
 import com.dto.MemberDTO;
 import com.dto.PagingQnABoardDTO;
+import com.dto.QnABoardCommentDTO;
 import com.dto.QnABoardDTO;
 import com.service.QnABoardService;
 
@@ -107,11 +106,13 @@ public class QnABoardController {
 
 	@RequestMapping("/adminCheck/updateQnaCommentBoardForm")
 	public String updateQnaCommentBoard(@ModelAttribute QnABoardDTO dto, HttpSession session, Model model) {
+		System.out.println(11111);
 		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readCommentBoard");
 		if (set == null) {
 			set = new HashSet<>();
 		}
-		model.addAttribute("boardInfo", service.selectQnACommentBoard(dto.getQna_num(), set));
+		QnABoardCommentDTO asd = service.selectQnACommentBoard(dto.getQna_num(), set);
+		model.addAttribute("boardInfo", asd);
 		
 		set.add(dto.getQna_num());
 		session.setAttribute("readCommentBoard", set);
@@ -119,28 +120,44 @@ public class QnABoardController {
 		return "qna_updateCommentboardForm";
 	}
 	
-	@RequestMapping("/loginCheck/updateBoard")
-	public String updateQnaBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
-		System.out.println(dto);
-		service.updateBoard(dto);
+	@RequestMapping("/loginCheck/updateBoardForm")
+	public String updateQnaBoard(@ModelAttribute() QnABoardDTO dto, HttpSession session, HttpServletRequest request) {
+		HashSet<Integer> set = (HashSet<Integer>)session.getAttribute("readBoard");
+		if (set == null) {
+			set = new HashSet<>();
+		}
 		
-		return "qna_boardForm";
+		request.setAttribute("QnABoard", service.seleclt(dto.getQna_num(), set));
+		set.add(dto.getQna_num());
+		session.setAttribute("readBoard", set);
+		return "qna_updateboardForm";
 	}
 	
 	@RequestMapping("/admenCheck/updateCommentBoard")
-	public String updateQnaCommentBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
-		System.out.println(dto);
+	public String updateQnaBoardForm(@ModelAttribute("QnABoard") QnABoardDTO dto) {
 		service.updateCommentBoard(dto);
 		
-		return "qna_CommentboardForm";
+		return "redirect:../qnaBoardListForm";
+	}
+	
+	@RequestMapping("/loginCheck/updateBoard")
+	public String updateQnaCommentBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
+		System.out.println(dto);
+		service.updateBoard(dto);
+		
+		return "redirect:../qnaBoardListForm";
 	}
 
 	@RequestMapping("/loginCheck/passwordCheck")
-	public String passwardCheck(@RequestParam("userpw") String userpw, HttpSession session) {
+	public @ResponseBody boolean passwardCheck(@RequestParam("userpw") String userpw, HttpSession session) {
 		
-		service.passwordCheck(((MemberDTO)session.getAttribute("loginInfo")).getUserid(), userpw);
+		return service.passwordCheck(((MemberDTO)session.getAttribute("loginInfo")).getUserid(), userpw);
+	}
+	@RequestMapping("/loginCheck/deleteBoard")
+	public String deleteBoard(@ModelAttribute("QnABoard") QnABoardDTO dto) {
+		service.deleteQnaBoard(dto);
 		
-		return "qna_CommentboardForm";
+		return "redirect:../qnaBoardListForm";
 	}
 	
 }

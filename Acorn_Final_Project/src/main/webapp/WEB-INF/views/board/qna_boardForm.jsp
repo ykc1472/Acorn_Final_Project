@@ -15,6 +15,7 @@
 		    }
 		    
 		});
+
 		$("#update").on("click", function(event){
 			var passwd = prompt("비밀번호를 입력하세요.", "");
 			var qna_num = $(this).attr("boardnum-data");
@@ -26,8 +27,33 @@
 					userpw : passwd
 				},
 				success : function(Data, status, xhr) {
-					if(Data == true){
-						location.href="/Final_Project/adminCheck/deleteQnaBoard?qna_num="+qna_num;
+					console.log(Data);
+					if(Data == "true"){
+						location.href="/Final_Project/loginCheck/updateBoardForm?qna_num="+qna_num;
+					} else{
+						alert("비밀번호가 틀렸습니다.");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.log("error");
+				}
+			})
+		});
+
+		$("#delete").on("click", function(event){
+			var passwd = prompt("비밀번호를 입력하세요.", "");
+			var qna_num = $(this).attr("boardnum-data");
+			$.ajax({
+				type : "GET",
+				url : "/Final_Project/loginCheck/passwordCheck",
+				dataType : "text",
+				data : {
+					userpw : passwd
+				},
+				success : function(Data, status, xhr) {
+					console.log(Data);
+					if(Data == "true"){
+						location.href="/Final_Project/loginCheck/deleteBoard?qna_num="+qna_num;
 					} else{
 						alert("비밀번호가 틀렸습니다.");
 					}
@@ -52,11 +78,11 @@
 				<c:choose>
 					<c:when test="${QnABoard.writedate eq QnABoard.rewritedate}">
 						<th>작성일</th>
-						<td>${QnABoard.writedate}</td>
+						<td>${fn:substring(QnABoard.writedate,0,13)}</td>
 					</c:when>
 					<c:otherwise>
 						<th>마지막수정일</th>
-						<td>${QnABoard.rewritedate}</td>
+						<td>${fn:substring(QnABoard.rewritedate,0,13)}</td>
 					</c:otherwise>
 				</c:choose>
 				
@@ -69,9 +95,9 @@
 				<td colspan="4" align="right">
 					<c:if test="${loginInfo.userid == QnABoard.userid}">
 						<c:if test="${QnABoard.qna_option == 1 || QnABoard.qna_option == 3}">
-							<a href="#" id="update" boardnum-data="${QnABoard.qna_num}">수정</a>&nbsp;
+							<button id="update" boardnum-data="${QnABoard.qna_num}">수정</button>&nbsp;
 						</c:if>
-						<a href="#">삭제</a>
+						<button id="delete" boardnum-data="${QnABoard.qna_num}">삭제</button>
 					</c:if>
 					<c:if test="${loginInfo.grade == 99 && QnABoard.qna_option != 0}">
 						<a id="passwd" title-data="${QnABoard.qna_title}" boardnum-data="${QnABoard.qna_num}" href="#">관리자 삭제 기능</a>&nbsp;&nbsp;&nbsp;

@@ -63,7 +63,7 @@
 				</c:otherwise>
 			</c:choose>
 				<td align="center">${list.nickname}</td>
-				<td align="center">${list.writedate}</td>
+				<td align="center">${fn:substring(list.writedate,0,13)}</td>
 				<td align="center">${list.readCount}</td>
 			</tr>
 			<c:forEach var="commentlist" items="${paging.qnacommentlist}">
@@ -71,7 +71,7 @@
 					<c:choose>
 						<c:when test="${(list.qna_option eq 0) && loginInfo.grade ne 99}">
 							<tr class="board">
-								<td align="center">${list.qna_num}</td>
+								<td align="center">&nbsp;ㄴ</td>
 								<td>삭제된 글입니다.</td>
 						</c:when>
 						<c:when test="${(list.qna_option eq 1 || list.qna_option eq 2) && loginInfo.userid ne list.userid && loginInfo.grade ne 99}">
@@ -86,7 +86,7 @@
 						</c:otherwise>
 					</c:choose>
 						<td align="center">${commentlist.nickname}</td>
-						<td align="center">${commentlist.writedate}</td>
+						<td align="center">${fn:substring(commentlist.writedate,0,13)}</td>
 						<td align="center">${commentlist.readCount}</td>
 					</tr>
 				</c:if>

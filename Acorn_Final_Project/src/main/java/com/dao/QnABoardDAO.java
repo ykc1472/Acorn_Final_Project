@@ -95,7 +95,7 @@ public class QnABoardDAO {
 	}
 
 	public String passwordCheck(String userid) {
-		return template.selectOne("MemberMapper.passwordCheck", userid);
+		return template.selectOne("BoardMapper.passwordCheck", userid);
 	}
 
 }

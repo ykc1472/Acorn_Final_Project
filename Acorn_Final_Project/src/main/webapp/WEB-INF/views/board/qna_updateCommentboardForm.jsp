@@ -7,7 +7,7 @@
 		<table border="1">
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="qna_title" id="title" maxlength="50" width="500px" value="${boardInfo.qna_title}"></td>
+				<td><input type="text" name="qna_title" id="title" maxlength="50" width="500px" value="${boardInfo.qnac_title}"></td>
 			</tr>
 			
 			<tr>
