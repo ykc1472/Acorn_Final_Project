@@ -26,8 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectQnaCommentList" resultType="QnABoardCommentDTO" parameterType="arraylist">
 		select qna_num, qnac_title, to_char(writedate, 'yyyy"년 "mm"월 "dd"일" HH24"시" MI"분" SS"초"') writedate, content, nickname, readcount 
 		from qnaboardcomment
-		where qna_num in 
-		<foreach collection="list" open="(" separator="," close=")" item="item">#{item.qna_num}</foreach>
+		<foreach collection="list" open="where qna_num in (" separator="," close=")" item="item">#{item.qna_num}</foreach>
 	</select>
 	
 	<select id="QnACountAll" resultType="int">

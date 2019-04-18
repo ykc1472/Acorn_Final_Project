@@ -66,47 +66,45 @@
 	})
 </script>
 <div align="center">
-	<form action="#" method="post">
-		<table border="1">
-			<tr>
-				<th>제목</th>
-				<td colspan="3"><span>${QnABoard.qna_num}.${QnABoard.qna_title}</span></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td width="350px"><span >${QnABoard.nickname}</span></td>
-				<c:choose>
-					<c:when test="${QnABoard.writedate eq QnABoard.rewritedate}">
-						<th>작성일</th>
-						<td>${fn:substring(QnABoard.writedate,0,13)}</td>
-					</c:when>
-					<c:otherwise>
-						<th>마지막수정일</th>
-						<td>${fn:substring(QnABoard.rewritedate,0,13)}</td>
-					</c:otherwise>
-				</c:choose>
-				
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td colspan="3"><textarea name=content rows ="15" cols="100" readonly="readonly">${QnABoard.content}</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="4" align="right">
-					<c:if test="${loginInfo.userid == QnABoard.userid}">
-						<c:if test="${QnABoard.qna_option == 1 || QnABoard.qna_option == 3}">
-							<button id="update" boardnum-data="${QnABoard.qna_num}">수정</button>&nbsp;
-						</c:if>
-						<button id="delete" boardnum-data="${QnABoard.qna_num}">삭제</button>
+	<table border="1">
+		<tr>
+			<th>제목</th>
+			<td colspan="3"><span>${QnABoard.qna_num}.${QnABoard.qna_title}</span></td>
+		</tr>
+		<tr>
+			<th>닉네임</th>
+			<td width="350px"><span >${QnABoard.nickname}</span></td>
+			<c:choose>
+				<c:when test="${QnABoard.writedate eq QnABoard.rewritedate}">
+					<th>작성일</th>
+					<td>${fn:substring(QnABoard.writedate,0,13)}</td>
+				</c:when>
+				<c:otherwise>
+					<th>마지막수정일</th>
+					<td>${fn:substring(QnABoard.rewritedate,0,13)}</td>
+				</c:otherwise>
+			</c:choose>
+			
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td colspan="3"><textarea name=content rows ="15" cols="100" readonly="readonly">${QnABoard.content}</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="right">
+				<c:if test="${loginInfo.userid == QnABoard.userid}">
+					<c:if test="${QnABoard.qna_option == 1 || QnABoard.qna_option == 3}">
+						<button id="update" boardnum-data="${QnABoard.qna_num}">수정</button>&nbsp;
 					</c:if>
-					<c:if test="${loginInfo.grade == 99 && QnABoard.qna_option != 0}">
-						<a id="passwd" title-data="${QnABoard.qna_title}" boardnum-data="${QnABoard.qna_num}" href="#">관리자 삭제 기능</a>&nbsp;&nbsp;&nbsp;
-						<c:if test="${!(QnABoard.qna_option eq 0 || QnABoard.qna_option eq 2 || QnABoard.qna_option eq 4)}">
-							<a href="/Final_Project/admenCheck/writeCommentBoardForm?pick=${QnABoard.qna_num}">답변</a>
-						</c:if>
+					<button id="delete" boardnum-data="${QnABoard.qna_num}">삭제</button>
+				</c:if>
+				<c:if test="${loginInfo.grade == 99 && QnABoard.qna_option != 0}">
+					<a id="passwd" title-data="${QnABoard.qna_title}" boardnum-data="${QnABoard.qna_num}" href="#">관리자 삭제 기능</a>&nbsp;&nbsp;&nbsp;
+					<c:if test="${!(QnABoard.qna_option eq 0 || QnABoard.qna_option eq 2 || QnABoard.qna_option eq 4)}">
+						<a href="/Final_Project/admenCheck/writeCommentBoardForm?pick=${QnABoard.qna_num}">답변</a>
 					</c:if>
-				</td>
-			</tr>
-		</table>
-	</form>
+				</c:if>
+			</td>
+		</tr>
+	</table>
 </div>
